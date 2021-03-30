@@ -53,6 +53,20 @@ const Icons: any = {
 
 export default function Main(props: MainProps) {
   const { categories, selectCategory, selectedCategories } = props;
+  const onClickCategory = (category: Category, isSelected: string) => {
+    if (isSelected) {
+      const newCategories = selectedCategories!.filter((selectedCategory) => {
+        if (selectedCategory !== isSelected) return selectedCategory;
+      });
+      selectCategory(newCategories);
+    } else {
+      const categories =
+        selectedCategories && selectedCategories.length > 0
+          ? [...selectedCategories, category.name]
+          : [category.name];
+      selectCategory(categories);
+    }
+  };
   return (
     <div>
       <Title>.התנדבות, לא מה שחשבת</Title>
@@ -62,30 +76,13 @@ export default function Main(props: MainProps) {
       <Categories>
         {categories &&
           categories.map((category: Category) => {
-            const categories =
-              selectedCategories && selectedCategories.length > 0
-                ? [...selectedCategories, category.name]
-                : [category.name];
             const isSelected = selectedCategories?.find(
               (selectedCategory) => category.name === selectedCategory
             ) as string;
-            console.log(selectedCategories);
             return (
               <CategoryWrapper
                 isSelected={!!isSelected}
-                onClick={() => {
-                  if (isSelected) {
-                    const newCategories = selectedCategories!.slice(
-                      selectedCategories!.findIndex(
-                        (selectedCategory) => selectedCategory === isSelected
-                      )
-                    );
-                    console.log(newCategories);
-                    selectCategory(newCategories);
-                  } else {
-                    selectCategory(categories);
-                  }
-                }}
+                onClick={() => onClickCategory(category, isSelected)}
               >
                 <div style={{ marginRight: "7px" }}>{category.name}</div>
                 {category.imgName && Icons[category.imgName]}
