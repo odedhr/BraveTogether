@@ -24,7 +24,7 @@ const SubTitle = styled.div`
   color: rgba(27, 27, 58, 0.5);
 `;
 const Text = styled.div`
-  margin-top: 2%;
+  margin-top: 1%;
 `;
 const CategoryWrapper = styled.div<{ isSelected: boolean }>`
   width: 7%;
@@ -77,9 +77,9 @@ export default function Main(props: MainProps) {
       </div>
       <SubTitle>מערך שיעורים בהתנדבות, מועברים על ידי גיבורי שואה</SubTitle>
       <Text>?מה בא לך ללמוד</Text>
-      <Text>!דרך אגב, אפשר יותר מדבר אחד</Text>
 
       {CategoriesRenderer()}
+      <Text>!דרך אגב, אפשר יותר מדבר אחד</Text>
       <Map openModal={() => setOpenModal(true)} />
       <Popup isModalOpen={isModalOpen} closePopup={(isOpen: boolean) => setOpenModal(isOpen)}>
         <></>
