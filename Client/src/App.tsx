@@ -1,14 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import AppBar from './components/AppBar/AppBar';
-import Main from './components/Main/Main';
-
+import React from "react";
+import "./App.css";
+import AppBar from "./components/AppBar/AppBar";
+import Main from "./components/Main/MainContainer";
+import GlobalStyle from "./globalStyles";
+import { Provider } from "react-redux";
+import store from "./store/store";
 function App() {
   return (
     <div className="App">
-      <AppBar></AppBar>
-      <Main></Main>
+      <Provider store={store}>
+        <GlobalStyle />
+        <AppBar />
+        <Main />
+      </Provider>
     </div>
   );
 }
