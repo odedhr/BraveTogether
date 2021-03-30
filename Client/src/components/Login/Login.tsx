@@ -1,9 +1,9 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -43,15 +43,11 @@ export default function Login() {
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label=" הרשם" />
-          <Tab label=" התחבר"/>
+          <Tab label=" התחבר" />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-       
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-       
-      </TabPanel>
+      <TabPanel value={value} index={0}></TabPanel>
+      <TabPanel value={value} index={1}></TabPanel>
     </div>
   );
 }

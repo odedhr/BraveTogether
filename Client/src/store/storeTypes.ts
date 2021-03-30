@@ -1,10 +1,11 @@
-export type Category={
-    name:string;
-    img?:string;
-}
+export type Category = {
+  name: string;
+  imgName?: string;
+};
 export type Entities = {
-    categories:Category[]
-}
-export type Store ={
-    entities:Entities
-}
+  categories: Category[];
+  selectedCategory: string[] | undefined;
+};
+export type Store = {
+  entities: Entities;
+};

@@ -1,1 +1,1 @@
-export const DEMO="DEMO"
+export const SELECT_CATEGORY="SELECT_CATEGORY"
