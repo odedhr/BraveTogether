@@ -4,12 +4,18 @@ const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate(models) {}
+    static associate(models) {
+      User.hasMany(models.Hero, {
+        foreignKey: 'manager_id',
+        as: 'heroes'
+      });
+    }
   };
   User.init({
     user_id: {
-      type: DataTypes.INTEGER,
-      unique: true
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.INTEGER
     },
     is_manager: {
       type: DataTypes.BOOLEAN,
@@ -22,6 +28,9 @@ module.exports = (sequelize, DataTypes) => {
     has_committed_to_privacy: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    image: {
+      type: DataTypes.STRING
     }
   }, {
     sequelize,

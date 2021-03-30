@@ -1,0 +1,106 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API that supports the Hackathon project of Team 35.",
+    "version": "1.0.0",
+    "title": "Brave Together: Team 35"
+  },
+  "tags": [
+    {
+      "name": "user",
+      "description": "Users management routes."
+    },
+    {
+      "name": "hero",
+      "description": "Heroes management routes."
+    },
+    {
+      "name": "event",
+      "description": "Events management routes."
+    }
+  ],
+  "paths": {
+    "/api/v1/users": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Fetches all users and merges the data with the users from the Brave Together database.",
+        "operationId": "fetchUser",
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add a new user to the Brave Together database, while using the id to create a new user record in the local database.",
+        "operationId": "adduser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object's fields that need to be added to the database",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User successfully added"  
+          }
+        }
+      }
+    },
+    "/api/v1/users/:id": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Fetches the user with the provided id and merges the data with the user from the Brave Together database.",
+        "operationId": "fetchUser",
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer"
+        },
+        "is_manager": {
+          "type": "boolean"
+        },
+        "has_criminal_record": {
+          "type": "boolean"
+        },
+        "has_committed_to_privacy": {
+          "type": "boolean"
+        },
+        "image": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Order"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Brave Together",
+    "url": "https://brave-together.com/"
+  }
+}
