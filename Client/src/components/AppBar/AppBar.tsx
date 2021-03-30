@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Popup from '../../Modal/Modal';
+import Popup from '../Modal/Modal';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,9 +31,6 @@ export default function AppBar() {
       <AppBarMaterial position="static">
         <Toolbar>
           <Button color="inherit" onClick={()=>setOpenModal(!isModalOpen)}>התחברות</Button>
-          <Typography variant="h6" className={classes.title}>
-            שם אפליקציה
-          </Typography>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>

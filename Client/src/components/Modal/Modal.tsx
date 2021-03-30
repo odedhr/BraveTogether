@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Modal from 'react-modal';
-import Login from '../components/Login/Login';
+import Login from '../Login/Login';
 
 export interface IPopupProps {
     isModalOpen:boolean;
@@ -44,6 +44,8 @@ export default function Popup (props: IPopupProps) {
           contentLabel="Example Popu"          
         >
             <div  ref={wrapperRef}>
+              <div>מכיר גיבור שואה שמעוניין ללמד?</div>
+              <div>הרשם או התחבר על מנת להוסיף מורה חדש</div>
           <Login></Login>
                 </div>
         </Modal>

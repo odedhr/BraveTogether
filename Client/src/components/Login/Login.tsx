@@ -42,8 +42,8 @@ export default function Login() {
     <div>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label=" מפיג בדידות" />
-          <Tab label=" משתתף"/>
+          <Tab label=" הרשם" />
+          <Tab label=" התחבר"/>
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
