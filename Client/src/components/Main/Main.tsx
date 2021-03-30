@@ -10,18 +10,18 @@ import { ReactComponent as Music } from "../../assets/icons/music.svg";
 import Map from "../Map/Map";
 import Popup from "../Modal/Modal";
 const Title = styled.div`
-  font-size: 60px;
-  line-height: 1.5;
+  font-size: 55px;
+  line-height: 1.13;
   letter-spacing: normal;
   text-align: center;
-  color: #2c828c;
+  color: #0a100d;
 `;
 const SubTitle = styled.div`
-  font-size: 35px;
+  font-size: 15px;
   line-height: 1.2;
   letter-spacing: normal;
   text-align: center;
-  color: rgba(44, 130, 140, 0.8);
+  color: rgba(27, 27, 58, 0.5);
 `;
 const Text = styled.div`
   margin-top: 2%;
@@ -71,12 +71,16 @@ export default function Main(props: MainProps) {
   };
   return (
     <div>
-      <Title>.התנדבות, לא מה שחשבת</Title>
-      <SubTitle>גיבורי שואה מכל הארץ מתנדבים ללמוד אותך</SubTitle>
-      <Text>מה תרצה ללמד? אפשר יותר מדבר אחד </Text>
+      <div>
+        <Title>השיעורים הכי משמעותיים</Title>
+        <Title>מגיבורים מעוררי השראה</Title>
+      </div>
+      <SubTitle>מערך שיעורים בהתנדבות, מועברים על ידי גיבורי שואה</SubTitle>
+      <Text>?מה בא לך ללמוד</Text>
+      <Text>!דרך אגב, אפשר יותר מדבר אחד</Text>
 
       {CategoriesRenderer()}
-      <Map openModal={()=>setOpenModal(true)} />
+      <Map openModal={() => setOpenModal(true)} />
       <Popup isModalOpen={isModalOpen} closePopup={(isOpen: boolean) => setOpenModal(isOpen)}>
         <></>
       </Popup>
