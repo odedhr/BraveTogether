@@ -40,8 +40,8 @@ export default function AppBar() {
       </AppBarMaterial>
       <Popup isModalOpen={isModalOpen} closePopup={(isOpen: boolean) => setOpenModal(isOpen)}>
         <>
-          <div>מכיר גיבור שואה שמעוניין ללמד?</div>
-          <div>הרשם או התחבר על מנת להוסיף מורה חדש</div>
+          <div>?איך מתחילים ללמד</div>
+          <div>הצטרפו למיזם שלנו והוסיפו מורים גיבורי שואה</div>
           <Login></Login>
         </>
       </Popup>
