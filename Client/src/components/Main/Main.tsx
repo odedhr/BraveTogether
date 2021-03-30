@@ -7,7 +7,8 @@ import { ReactComponent as Chess } from "../../assets/icons/chess.svg";
 import { ReactComponent as Langugage } from "../../assets/icons/language.svg";
 import { ReactComponent as Study } from "../../assets/icons/study.svg";
 import { ReactComponent as Music } from "../../assets/icons/music.svg";
-
+import Map from "../Map/Map";
+import Popup from "../Modal/Modal";
 const Title = styled.div`
   font-size: 55px;
   line-height: 1.13;
@@ -23,7 +24,7 @@ const SubTitle = styled.div`
   color: rgba(27, 27, 58, 0.5);
 `;
 const Text = styled.div`
-  margin-top: 2%;
+  margin-top: 1%;
 `;
 const CategoryWrapper = styled.div<{ isSelected: boolean }>`
   width: 7%;
@@ -53,6 +54,7 @@ const Icons: any = {
 
 export default function Main(props: MainProps) {
   const { categories, selectCategory, selectedCategories } = props;
+  const [isModalOpen, setOpenModal] = React.useState(false);
   const onClickCategory = (category: Category, isSelected: string) => {
     if (isSelected) {
       const newCategories = selectedCategories!.filter((selectedCategory) => {
@@ -75,7 +77,18 @@ export default function Main(props: MainProps) {
       </div>
       <SubTitle>מערך שיעורים בהתנדבות, מועברים על ידי גיבורי שואה</SubTitle>
       <Text>?מה בא לך ללמוד</Text>
+
+      {CategoriesRenderer()}
       <Text>!דרך אגב, אפשר יותר מדבר אחד</Text>
+      <Map openModal={() => setOpenModal(true)} />
+      <Popup isModalOpen={isModalOpen} closePopup={(isOpen: boolean) => setOpenModal(isOpen)}>
+        <></>
+      </Popup>
+    </div>
+  );
+
+  function CategoriesRenderer() {
+    return (
       <Categories>
         {categories &&
           categories.map((category: Category) => {
@@ -84,6 +97,7 @@ export default function Main(props: MainProps) {
             ) as string;
             return (
               <CategoryWrapper
+                key={category.name}
                 isSelected={!!isSelected}
                 onClick={() => onClickCategory(category, isSelected)}
               >
@@ -93,6 +107,6 @@ export default function Main(props: MainProps) {
             );
           })}
       </Categories>
-    </div>
-  );
+    );
+  }
 }

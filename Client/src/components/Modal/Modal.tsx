@@ -1,10 +1,10 @@
 import * as React from "react";
 import Modal from "react-modal";
-import Login from "../Login/Login";
 
 export interface IPopupProps {
   isModalOpen: boolean;
   closePopup: (isOpen: boolean) => void;
+  children: JSX.Element;
 }
 const customStyles = {
   content: {
@@ -39,11 +39,7 @@ export default function Popup(props: IPopupProps) {
   }, [wrapperRef]);
   return (
     <Modal isOpen={isModalOpen} style={customStyles} contentLabel="Example Popu">
-      <div ref={wrapperRef}>
-        <div>?איך מתחילים ללמד</div>
-        <div>הצטרפו למיזם שלנו והוסיפו מורים גיבורי שואה</div>
-        <Login></Login>
-      </div>
+      <div ref={wrapperRef}>{props.children}</div>
     </Modal>
   );
 }
