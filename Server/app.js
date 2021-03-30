@@ -35,3 +35,47 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+const{google} = require('googleapis');
+const keys = require('./keys.json');
+
+const client = new google.auth.JWT(
+  keys.client_email,
+  null, 
+  keys.private_key,
+  ['https://www.googleapis.com/auth/spreadsheets']
+);
+
+client.authorize(function(err,tokens){
+  if(err){
+    console.log(err);
+    return;
+  }else{
+    console.log('Connected!');
+    gsrun(client);
+  }
+});
+
+
+async function gsrun(cl){
+  const gsapi = google.sheets({version:'v4', auth: cl });
+
+  const options = {
+    spreadsheetId: '1dXiQOeqbLORhQ8XTROrN-GSpn4DOR2nOJblKM_eH1Ws',
+    range: 'Data!A1:E5'
+  };
+
+  let data = await gsapi.spreadsheets.values.get(options);
+  let dataArray = data.data.values; //reads sheet values
+  
+  console.log(dataArray);
+  
+  
+  
+  let newDataArray = dataArray.map(function(r){
+    r.push(r[0] + '-' + r[1]);
+    return r;
+  });
+  console.log(newDataArray);
+}
