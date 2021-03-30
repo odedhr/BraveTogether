@@ -1,9 +1,9 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 import SignUpForm from "../Form/SignUpForm";
 import SignInForm from "../Form/SignInForm";
 
@@ -33,24 +33,16 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 const SignUpLabel = (
-    <div>
-        <div>
-            ?חדשים פה
-        </div>
-        <div>
-            הצטרפו
-        </div>
-    </div>
+  <div>
+    <div>?חדשים פה</div>
+    <div>הצטרפו</div>
+  </div>
 );
 const SignInLabel = (
-    <div>
-        <div>
-            !חזרתם אלינו? איזה כיף
-        </div>
-        <div>
-            הכנסו
-        </div>
-    </div>
+  <div>
+    <div>!חזרתם אלינו? איזה כיף</div>
+    <div>הכנסו</div>
+  </div>
 );
 
 export default function Login() {
@@ -65,14 +57,14 @@ export default function Login() {
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab icon={SignInLabel} />
-          <Tab icon={SignUpLabel}/>
+          <Tab icon={SignUpLabel} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <SignInForm/>
+        <SignInForm />
       </TabPanel>
       <TabPanel value={value} index={1}>
-          <SignUpForm/>
+        <SignUpForm />
       </TabPanel>
     </div>
   );
