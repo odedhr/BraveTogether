@@ -7,6 +7,7 @@ import { ReactComponent as Chess } from "../../assets/icons/chess.svg";
 import { ReactComponent as Langugage } from "../../assets/icons/language.svg";
 import { ReactComponent as Study } from "../../assets/icons/study.svg";
 import { ReactComponent as Music } from "../../assets/icons/music.svg";
+import Map from "../Map/Map";
 
 const Title = styled.div`
   font-size: 60px;
@@ -81,6 +82,7 @@ export default function Main(props: MainProps) {
             ) as string;
             return (
               <CategoryWrapper
+                key={category.name}
                 isSelected={!!isSelected}
                 onClick={() => onClickCategory(category, isSelected)}
               >
@@ -90,6 +92,7 @@ export default function Main(props: MainProps) {
             );
           })}
       </Categories>
+      <Map />
     </div>
   );
 }
