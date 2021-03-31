@@ -1,13 +1,12 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Menu, { MenuProps } from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import styled from "styled-components";
-import ListItemText from "@material-ui/core/ListItemText";
-
+import { DropDownMenuProps } from "./DropDownMenuContainer";
 import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
-
+import Popup from "../Modal/Modal";
+import Login from "../Login/Login";
+import TeacherCardForm from "../Form/TeacherCardFormContainer";
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
@@ -27,9 +26,6 @@ const StyledMenu = withStyles({
     {...props}
   />
 ));
-const ListItemTextStyled = styled(ListItemText)`
-  direction: rtl;
-`;
 const StyledMenuItem = withStyles((theme) => ({
   root: {
     "&:focus": {
@@ -42,13 +38,22 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function DropDownMenu() {
+export default function DropDownMenu(props: DropDownMenuProps) {
+  const { isLoggedIn, managerSignedUp } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
+  const [isLoginModalOpen, setOpenLoginModal] = React.useState(false);
+  const [isRegisterTeacherModalOpen, setRegisterTeacherModalOpen] = React.useState(false);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+    if (isLoggedIn) setAnchorEl(event.currentTarget);
+    else {
+      setOpenLoginModal(true);
+    }
   };
-
+  React.useEffect(() => {
+    if (managerSignedUp) {
+      setOpenLoginModal(false);
+    }
+  }, [managerSignedUp]);
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -73,8 +78,13 @@ export default function DropDownMenu() {
         <StyledMenuItem>
           <div>מורים שפנית אליהם</div>
         </StyledMenuItem>
-        <StyledMenuItem>
-          <div>מורים שפנית אליהם</div>
+        <StyledMenuItem
+          onClick={() => {
+            setRegisterTeacherModalOpen(true);
+            handleClose();
+          }}
+        >
+          <div>הוספת מורה</div>
         </StyledMenuItem>
         <StyledMenuItem>
           <div>מורים שהוספת</div>
@@ -87,6 +97,22 @@ export default function DropDownMenu() {
           <div>התנתק</div>
         </StyledMenuItem>
       </StyledMenu>
+      <Popup
+        isModalOpen={isLoginModalOpen}
+        closePopup={(isOpen: boolean) => setOpenLoginModal(isOpen)}
+      >
+        <>
+          <div>?איך מתחילים ללמד</div>
+          <div>הצטרפו למיזם שלנו והוסיפו מורים גיבורי שואה</div>
+          <Login></Login>
+        </>
+      </Popup>
+      <Popup
+        isModalOpen={isRegisterTeacherModalOpen}
+        closePopup={(isOpen: boolean) => setRegisterTeacherModalOpen(isOpen)}
+      >
+        <TeacherCardForm />
+      </Popup>
     </div>
   );
 }

@@ -1,8 +1,17 @@
+import { black } from "material-ui/styles/colors";
 import React from "react";
 import { useDropzone } from "react-dropzone";
+import styled from "styled-components";
 type Props = {
   getFiles: (files: File[]) => void;
 };
+const TextInsideDrop = styled.div`
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  direction: rtl;
+`;
 export default function Accept(props: Props) {
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } = useDropzone({
     accept: "image/jpeg, image/png",
@@ -13,8 +22,13 @@ export default function Accept(props: Props) {
       <div
         {...getRootProps({ className: "dropzone" })}
         style={{
-          height: "70px",
-          width: "70px",
+          height: "120px",
+          width: "120px",
+          border: "1px dashed black",
+          display: "flex",
+          flexDirection: "column",
+          borderRadius: "50%",
+          outline: "none",
         }}
       >
         <input
@@ -33,11 +47,10 @@ export default function Accept(props: Props) {
             style={{ borderRadius: "50%" }}
           />
         ) : (
-          <>
-            <p>תמונה</p>
-            <div>שווה אלף מילים</div>
-            <div>אנחנו ממליצים</div>
-          </>
+          <TextInsideDrop>
+            <p style={{ fontWeight: "bold" }}>תמונה</p>
+            <div>שווה אלף מילים אנחנו ממליצים</div>
+          </TextInsideDrop>
         )}
       </div>
     </section>

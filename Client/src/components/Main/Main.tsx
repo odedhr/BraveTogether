@@ -9,14 +9,14 @@ import { ReactComponent as Study } from "../../assets/icons/study.svg";
 import { ReactComponent as Music } from "../../assets/icons/music.svg";
 import Map from "../Map/MapContainer";
 import Popup from "../Modal/Modal";
-const Title = styled.div`
-  font-size: 55px;
+export const Title = styled.div`
+  font-size: 50px;
   line-height: 1.13;
   letter-spacing: normal;
   text-align: center;
   color: #0a100d;
 `;
-const SubTitle = styled.div`
+export const SubTitle = styled.div`
   font-size: 15px;
   line-height: 1.2;
   letter-spacing: normal;
@@ -27,8 +27,8 @@ const Text = styled.div`
   margin-top: 1%;
 `;
 const CategoryWrapper = styled.div<{ isSelected: boolean }>`
-  width: 7%;
-  height: 3%;
+  width: 100px;
+  height: 25px;
   flex-grow: 0;
   padding: 9px 23px 9px 23.5px;
   border-radius: 50px;
@@ -44,6 +44,7 @@ const CategoryWrapper = styled.div<{ isSelected: boolean }>`
 const Categories = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 3%;
 `;
 const Icons: any = {
   chess: <Chess />,
@@ -54,8 +55,9 @@ const Icons: any = {
 };
 
 export default function Main(props: MainProps) {
-  const { categories, selectCategory, selectedCategories } = props;
+  const { categories, selectCategory, selectedCategories, managerSignedUp } = props;
   const [isModalOpen, setOpenModal] = React.useState(false);
+  const [isMangerSignedUpState, setIsMangerSignedUpState] = React.useState(false);
   const onClickCategory = (category: Category, isSelected: string) => {
     if (isSelected) {
       const newCategories = selectedCategories!.filter((selectedCategory) => {
@@ -70,16 +72,15 @@ export default function Main(props: MainProps) {
       selectCategory(categories);
     }
   };
+  React.useEffect(() => {
+    if (managerSignedUp) setIsMangerSignedUpState(true);
+  }, [managerSignedUp]);
+  console.log(isMangerSignedUpState);
   return (
     <div>
-      <div>
-        <Title>השיעורים הכי משמעותיים</Title>
-        <Title>מגיבורים מעוררי השראה</Title>
-      </div>
-      <SubTitle>מערך שיעורים בהתנדבות, מועברים על ידי גיבורי שואה</SubTitle>
-      <Text>?מה בא לך ללמוד</Text>
+      {isMangerSignedUpState ? AfterRegisterManagerText() : WelcomeText()}
 
-      {CategoriesRenderer()}
+      {CategoriesRenderer(categories, selectedCategories, onClickCategory)}
       <Text>!דרך אגב, אפשר יותר מדבר אחד</Text>
       <Map openModal={() => setOpenModal(true)} />
       <Popup isModalOpen={isModalOpen} closePopup={(isOpen: boolean) => setOpenModal(isOpen)}>
@@ -88,26 +89,72 @@ export default function Main(props: MainProps) {
     </div>
   );
 
-  function CategoriesRenderer() {
+  function WelcomeText() {
     return (
-      <Categories>
-        {categories &&
-          categories.map((category: Category) => {
-            const isSelected = selectedCategories?.find(
-              (selectedCategory) => category.name === selectedCategory
-            ) as string;
-            return (
-              <CategoryWrapper
-                key={category.name}
-                isSelected={!!isSelected}
-                onClick={() => onClickCategory(category, isSelected)}
-              >
-                <div style={{ marginRight: "7px" }}>{category.name}</div>
-                {category.imgName && Icons[category.imgName]}
-              </CategoryWrapper>
-            );
-          })}
-      </Categories>
+      <>
+        <div>
+          <Title>השיעורים הכי משמעותיים</Title>
+          <Title>מגיבורים מעוררי השראה</Title>
+        </div>
+        <SubTitle>מערך שיעורים בהתנדבות, מועברים על ידי גיבורי שואה</SubTitle>
+        <Text>?מה בא לך ללמוד</Text>
+      </>
     );
   }
+}
+export const CategoriesRenderer = (
+  categories: Category[],
+  selectedCategories: string[] | undefined,
+  onClickCategory: (categoryName: Category, foundString: string) => void
+) => {
+  return (
+    <Categories>
+      {categories &&
+        categories.map((category: Category) => {
+          const foundString = selectedCategories?.find(
+            (selectedCategory) => category.name === selectedCategory
+          ) as string;
+          return (
+            <CategoryWrapper
+              key={category.name}
+              isSelected={!!foundString}
+              onClick={() => onClickCategory(category, foundString)}
+            >
+              <div style={{ marginRight: "7px" }}>{category.name}</div>
+              {category.imgName && Icons[category.imgName]}
+            </CategoryWrapper>
+          );
+        })}
+    </Categories>
+  );
+};
+export const InTheNextDay = styled.div`
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: rgba(10, 16, 13, 0.7);
+  font-size: 25px;
+  width: 50%;
+  margin-top: 1%;
+`;
+const QuestionText = styled.div`
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: rgba(10, 16, 13, 0.6);
+`;
+function AfterRegisterManagerText() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Title>בקשתך התקבלה</Title>
+      <InTheNextDay>
+        בימים הקרובים, אנו נעבור על בקשתך על מנת לאשר אותה, זאת על מנת לשמור על בטיחות הגיבוים
+        והתלמידים כאחד. תוך יום-יומיים נחזור אלייך. תודה על הסבלנות
+      </InTheNextDay>
+      <div style={{ marginTop: "3%" }}>
+        <QuestionText> שאלות? רעיונות? נשמע לשמוע מכם </QuestionText>
+        <QuestionText> doers@brave-together.com </QuestionText>
+      </div>
+    </div>
+  );
 }

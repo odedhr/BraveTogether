@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBarMaterial from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Menu from "./DropDownMenu";
+import Menu from "./DropDownMenuContainer";
 import Button from "@material-ui/core/Button";
 
-import Popup from "../Modal/Modal";
-import Login from "../Login/Login";
+
 import styled from "styled-components";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -35,7 +34,6 @@ const Link = styled.div`
 `;
 export default function AppBar() {
   const classes = useStyles();
-  const [isModalOpen, setOpenModal] = useState(false);
 
   return (
     <div className={classes.root}>
@@ -48,13 +46,6 @@ export default function AppBar() {
           <Link>?מי אנחנו</Link>
         </Toolbar>
       </StyledAppBar>
-      <Popup isModalOpen={isModalOpen} closePopup={(isOpen: boolean) => setOpenModal(isOpen)}>
-        <>
-          <div>?איך מתחילים ללמד</div>
-          <div>הצטרפו למיזם שלנו והוסיפו מורים גיבורי שואה</div>
-          <Login></Login>
-        </>
-      </Popup>
     </div>
   );
 }
