@@ -26,6 +26,11 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+      },
       image: {
         type: Sequelize.STRING
         // TODO: allowNull: false

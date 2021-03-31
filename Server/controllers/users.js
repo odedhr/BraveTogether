@@ -28,15 +28,44 @@ module.exports = {
     };
 
     try {
-      const userAPI = null; // TODO: fetch user from api
-      const user = await User.findOne(
-        { where: { user_id: req.params.id } },
-        {
-          include: ["heroes"],
-        }
-      );
-      // TODO: mapper that will merge the two user data objects
-      content.user = user;
+      const user = await User.findOne({ where: {
+        user_id: req.params.id 
+      }, raw: true },{ include: ["heroes"] } );
+
+      if (!user) throw new Error(`User with id #${req.params.id} does not exist`);
+
+      const response = await axios(`http://localhost:5000/user/${req.params.id}`);
+
+      content.user = {
+        ...user,
+        ...response.data
+      };
+    } catch (error) {
+      content.error = true;
+      content.message = error.message;
+    }
+
+    res.send(content);
+  },
+  fetchOneByEmail: async (req, res) => {
+    const content = {
+      error: false,
+      message: `User with email #${req.params.email} successfully fetched`,
+    };
+
+    try {
+      const user = await User.findOne({ where: {
+        email: req.params.email 
+      }, raw: true },{ include: ["heroes"] });
+
+      if (!user) throw new Error(`User with email #${req.params.email} does not exist`);
+      
+      const response = await axios(`http://localhost:5000/user/${user.user_id}`);
+
+      content.user = {
+        ...user,
+        ...response.data
+      };
     } catch (error) {
       content.error = true;
       content.message = error.message;
