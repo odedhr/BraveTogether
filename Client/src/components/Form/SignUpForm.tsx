@@ -2,15 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components'
 
-// const InputAppearance = styled.div`
-//   font-size: 22px;
-//   line-height: normal;
-//   letter-spacing: normal;
-//   text-align: right;
-//   color: rgba(0, 0, 0, 0.6);
-// `
-
-const InputBox = styled.input<any>`
+export const InputBox = styled.input<any>`
   border: none;
   border-radius: 10%;
   margin-bottom: 5%;
@@ -28,14 +20,14 @@ const InputCheckBoxLabel = styled.label`
     
 `
 
-const SubmitButton = styled.input`
+export const SubmitButton = styled.input`
   padding-left: 5%;
   padding-bottom: 1%;
   border-radius: 1%;
   background-color: #80ced7;
 `
 
-const Form = styled.form`
+export const Form = styled.form`
   direction: rtl;
 `
 
@@ -52,7 +44,6 @@ interface FormInput{
 export default function SignUpForm() {
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = (data:FormInput) => console.log(data);
-    console.log(errors);
     return (
         <div>
             <Form onSubmit={handleSubmit(onSubmit)}>

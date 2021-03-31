@@ -7,7 +7,7 @@ import { ReactComponent as Chess } from "../../assets/icons/chess.svg";
 import { ReactComponent as Langugage } from "../../assets/icons/language.svg";
 import { ReactComponent as Study } from "../../assets/icons/study.svg";
 import { ReactComponent as Music } from "../../assets/icons/music.svg";
-import Map from "../Map/Map";
+import Map from "../Map/MapContainer";
 import Popup from "../Modal/Modal";
 const Title = styled.div`
   font-size: 55px;
@@ -32,9 +32,10 @@ const CategoryWrapper = styled.div<{ isSelected: boolean }>`
   flex-grow: 0;
   padding: 9px 23px 9px 23.5px;
   border-radius: 50px;
-  background-color: ${(props) => (props.isSelected ? "darkgrey" : "#e5e5e5")};
+  border: solid 1px #000000;
+  background-color: ${(props) => (props.isSelected ? "#048ba8" : "#ffffff")};
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin: 0px 0.5%;
   color: ${(props) => (props.isSelected ? "white" : "black")};
