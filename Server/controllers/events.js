@@ -16,7 +16,7 @@ module.exports = {
           'Content-Type': 'application/json'
         },
         auth: auth = {
-          username: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTQsImV4cCI6MTYxNzIxMjM5Ny44NzY0MDJ9.bZY3PacXtAOeOsg4LnlEA9MJ7GPT1ggfT2IZTTZy99g',
+          username: req.body.token,
           password: ''
         }
       });
