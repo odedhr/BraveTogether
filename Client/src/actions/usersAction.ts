@@ -2,11 +2,13 @@ import { User } from "../store/storeTypes";
 import { makeApiUrl } from "./utils";
 import apiAction from "./apiAction";
 import {
-  convertAddressToLocationAC,
+  convertAddressToLocationThenCreateEventAC,
+  createHeroRequsetAction,
   loginUserAction,
   registerUser,
   tokenRequestAction,
 } from "./types/userActionTypes";
+import { Hero, TeacherInput } from "../components/Form/TeacherCardForm";
 export type UserPost = {
   email: string;
   password: string;
@@ -16,6 +18,7 @@ export type UserPost = {
   is_manager: boolean;
   has_criminal_record: boolean;
   has_committed_to_privacy: boolean;
+  has_applied_for_manager: boolean;
 };
 export const registerUserRequset = (user: UserPost) => {
   const url = makeApiUrl("users/");
@@ -32,6 +35,22 @@ export const registerUserRequset = (user: UserPost) => {
       onSuccess: (data, dispatch) => {
         dispatch(registerUser.success(data));
       },
+      onStarted: () => {},
+    },
+  });
+};
+export const createHeroRequset = (hero: Hero) => {
+  const url = makeApiUrl("heroes/");
+  console.log(hero);
+  return apiAction({
+    request: {
+      url,
+      method: "POST",
+      data: hero,
+    },
+    logic: {
+      onFailed: (error, dispatch) => console.log(error),
+      onSuccess: (data, dispatch) => console.log(data),
       onStarted: () => {},
     },
   });
@@ -57,7 +76,7 @@ export const tokenRequest = (username: string, password: string) => {
   });
 };
 export const loginRequest = (username: string) => {
-  const url = makeApiUrl("/user/" + username);
+  const url = makeApiUrl("users/by-email/" + username);
   return apiAction({
     request: {
       url,
@@ -66,26 +85,7 @@ export const loginRequest = (username: string) => {
       onFailed: (error, dispatch) => dispatch(loginUserAction.failure(error)),
       onSuccess: (data, dispatch) => {
         console.log(data);
-        dispatch(loginUserAction.success(data));
-      },
-      onStarted: () => {},
-    },
-  });
-};
-export const convertAddressToLocation = (address: string) => {
-  const url = "http://api.positionstack.com/v1/forward";
-  return apiAction({
-    request: {
-      url,
-      params: {
-        access_key: "93de448afd13312becfeb7b03e1a9711",
-        query: address,
-      },
-    },
-    logic: {
-      onFailed: (error, dispatch) => dispatch(convertAddressToLocationAC.failure(error)),
-      onSuccess: (data, dispatch) => {
-        dispatch(convertAddressToLocationAC.success(data.data[0]));
+        if (!data.error) dispatch(loginUserAction.success(data.user));
       },
       onStarted: () => {},
     },

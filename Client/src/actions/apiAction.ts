@@ -37,6 +37,7 @@ const pendingRequests = new Map<string, CancelTokenSource>();
 
 export default function apiAction(conf: ApiActionConfig) {
   const { request, logic, interceptor } = conf;
+
   return async function (dispatch: ThunkDispatch<Store, any, Action>, getState: () => Store) {
     let tokenSource: CancelTokenSource | undefined;
     const state = getState();
@@ -51,7 +52,6 @@ export default function apiAction(conf: ApiActionConfig) {
     request.data = typeof request.data === "function" ? request.data(state) : request.data;
     request.method = request.method || "GET";
     const contentTypeHeader = { "Content-Type": "application/json" };
-    const token = getState().user.token ? getState().user.token : "";
     request.headers = { ...contentTypeHeader, ...request.headers };
 
     if (interceptor && interceptor(state)) return;
