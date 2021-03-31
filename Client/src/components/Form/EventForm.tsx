@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Form, InputBox, SubmitButton } from "./SignUpForm";
+
 interface FormInput {
   address: string;
   lastName: string;
@@ -13,7 +14,11 @@ interface FormInput {
 }
 export default function Event() {
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data: FormInput) => console.log(data);
+
+  const onSubmit = (data: FormInput) => {
+    console.log(data);
+  };
+
   return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
