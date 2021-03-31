@@ -39,7 +39,7 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 export default function DropDownMenu(props: DropDownMenuProps) {
-  const { isLoggedIn } = props;
+  const { isLoggedIn, managerSignedUp } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [isLoginModalOpen, setOpenLoginModal] = React.useState(false);
   const [isRegisterTeacherModalOpen, setRegisterTeacherModalOpen] = React.useState(false);
@@ -49,7 +49,11 @@ export default function DropDownMenu(props: DropDownMenuProps) {
       setOpenLoginModal(true);
     }
   };
-
+  React.useEffect(() => {
+    if (managerSignedUp) {
+      setOpenLoginModal(false);
+    }
+  }, [managerSignedUp]);
   const handleClose = () => {
     setAnchorEl(null);
   };

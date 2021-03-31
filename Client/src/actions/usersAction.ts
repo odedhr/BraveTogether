@@ -1,18 +1,46 @@
 import { User } from "../store/storeTypes";
 import { makeApiUrl } from "./utils";
 import apiAction from "./apiAction";
-import shortid from "shortid";
-import { convertAddressToLocationAC } from "./types/userActionTypes";
-
-export const registerUserRequset = (user: any) => {
+import { convertAddressToLocationAC, registerUser } from "./types/userActionTypes";
+export type UserPost = {
+  email: string;
+  password: string;
+  first_name: string;
+  last_name: string;
+  cellphone: string;
+  is_manager: boolean;
+  has_criminal_record: boolean;
+  has_committed_to_privacy: boolean;
+};
+export const registerUserRequset = (user: UserPost) => {
   const url = makeApiUrl("users/");
-  user.user_id = shortid.generate();
+  console.log(user);
+
   return apiAction({
     request: {
       url,
       method: "POST",
-      params: {
-        user,
+      data: user,
+    },
+    logic: {
+      onFailed: (error, dispatch) => console.log(error),
+      onSuccess: (data, dispatch) => {
+        dispatch(registerUser.success(data));
+      },
+      onStarted: () => {},
+    },
+  });
+};
+export const loginRequest = (username: string, password: string) => {
+  const url = makeApiUrl("http://localhost:5000/token");
+  return apiAction({
+    request: {
+      url,
+      headers: {
+        auth: {
+          username,
+          password,
+        },
       },
     },
     logic: {
@@ -22,7 +50,6 @@ export const registerUserRequset = (user: any) => {
     },
   });
 };
-
 export const convertAddressToLocation = (address: string) => {
   const url = "http://api.positionstack.com/v1/forward";
   return apiAction({
@@ -36,7 +63,6 @@ export const convertAddressToLocation = (address: string) => {
     logic: {
       onFailed: (error, dispatch) => dispatch(convertAddressToLocationAC.failure(error)),
       onSuccess: (data, dispatch) => {
-        console.log(data.data[0]);
         dispatch(convertAddressToLocationAC.success(data.data[0]));
       },
       onStarted: () => {},

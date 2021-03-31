@@ -15,9 +15,7 @@ interface FormInput {
 export default function Event() {
   const { register, handleSubmit, errors } = useForm();
 
-  const onSubmit = (data: FormInput) => {
-    console.log(data);
-  };
+  const onSubmit = (data: FormInput) => {};
 
   return (
     <div>

@@ -5,7 +5,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import SignUpForm from "../Form/SignUpFormContainer";
-import SignInForm from "../Form/SignInForm";
+import SignInForm from "../Form/SignInFormContainer";
 
 interface TabPanelProps {
   children?: React.ReactNode;

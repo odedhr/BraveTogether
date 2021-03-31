@@ -49,21 +49,19 @@ const TextArea = styled.textarea`
   border: none;
 `;
 export default function TeacherCardForm(props: TeacherCardFormProps) {
-  const { categories, convertAddressToLocation,newEvent } = props;
+  const { categories, convertAddressToLocation, newEvent } = props;
   const [selectedCategories, setSelectedCategories] = React.useState<string[]>([]);
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data: TeacherInput) => {
     convertAddressToLocation(data.address);
   };
   React.useEffect(() => {
-    if(newEvent && newEvent.long && newEvent.topic){
-
+    if (newEvent && newEvent.long && newEvent.topic) {
     }
-  },[newEvent]);
+  }, [newEvent]);
   const [files, setFiles] = React.useState<File[]>([]);
   const getFiles = (filesFromDropZone: File[]) => {
     setFiles(filesFromDropZone);
-    console.log("files", files);
   };
   const onClickCategory = (category: Category, isSelectedString: string) => {
     if (isSelectedString) {

@@ -55,8 +55,9 @@ const Icons: any = {
 };
 
 export default function Main(props: MainProps) {
-  const { categories, selectCategory, selectedCategories, convertAddressToLocation } = props;
+  const { categories, selectCategory, selectedCategories, managerSignedUp } = props;
   const [isModalOpen, setOpenModal] = React.useState(false);
+  const [isMangerSignedUpState, setIsMangerSignedUpState] = React.useState(false);
   const onClickCategory = (category: Category, isSelected: string) => {
     if (isSelected) {
       const newCategories = selectedCategories!.filter((selectedCategory) => {
@@ -71,9 +72,13 @@ export default function Main(props: MainProps) {
       selectCategory(categories);
     }
   };
+  React.useEffect(() => {
+    if (managerSignedUp) setIsMangerSignedUpState(true);
+  }, [managerSignedUp]);
+  console.log(isMangerSignedUpState);
   return (
     <div>
-      {AfterRegisterManagerText()}
+      {isMangerSignedUpState ? AfterRegisterManagerText() : WelcomeText()}
 
       {CategoriesRenderer(categories, selectedCategories, onClickCategory)}
       <Text>!דרך אגב, אפשר יותר מדבר אחד</Text>

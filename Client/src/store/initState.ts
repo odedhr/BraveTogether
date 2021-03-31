@@ -24,5 +24,6 @@ export default {
     userAgreement: undefined,
     id: undefined,
     token: undefined,
+    is_manager: false,
   },
 } as Store;

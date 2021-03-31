@@ -45,6 +45,7 @@ module.exports = {
   },
   create: async (req, res) => {
     // TODO: Sync with the API
+    console.log(req.body);
     try {
       var apiUser = await axios.post(
         "http://127.0.0.1:5000/user",

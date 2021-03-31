@@ -27,6 +27,7 @@ export type User = {
   userAgreement: boolean | undefined;
   id: string | undefined;
   token:string|undefined;
+  is_manager:boolean
 };
 export type Store = {
   entities: Entities;
