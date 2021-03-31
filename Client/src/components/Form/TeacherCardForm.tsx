@@ -6,6 +6,7 @@ import { CategoriesRenderer, InTheNextDay, SubTitle, Title } from "../Main/Main"
 import { TeacherCardFormProps } from "./TeacherCardFormContainer";
 import { Category, Event } from "../../store/storeTypes";
 import { Token } from "../../actions/types/userActionTypes";
+import shortId from "shortid";
 export type TeacherInput = {
   speciality: string;
   fullName: string;
@@ -59,10 +60,11 @@ const TextArea = styled.textarea`
 export default function TeacherCardForm(props: TeacherCardFormProps) {
   const {
     categories,
-    convertAddressToLocationThenCreateEvent,
     newEvent,
-    postNewEvent,
     user,
+    hero,
+    convertAddressToLocationThenCreateEvent,
+    postNewEvent,
     createHeroRequset,
   } = props;
   const [selectedCategories, setSelectedCategories] = React.useState<string[]>([]);
@@ -77,25 +79,30 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
       token: user.token,
       first_name: "sdfs",
       last_name: "gfdgfds",
-      manager_id: 21,
+      manager_id: user.id,
     };
     createHeroRequset(hero as any);
     convertAddressToLocationThenCreateEvent(data.location);
     setFormData(data);
   };
   React.useEffect(() => {
-    if (newEvent?.lat && newEvent?.long) {
-      const createEvent: Event & Token = {
-        ...newEvent,
-        ...formData,
+    if (newEvent?.lat && newEvent?.long && hero.id) {
+      const createEvent: any = {
+        lat: newEvent.lat,
+        long: newEvent?.long,
+        address: formData?.location!,
+        hero_id: hero.id,
+        manager_id: user.id!,
+        title: shortId(),
+        description: formData?.description!,
         tags: selectedCategories,
-        pic: files[0],
-        token: user.token ? user.token : "",
+        // pic: files[0],
+        token: user.token!,
         reward: 10,
       };
       postNewEvent(createEvent);
     }
-  }, [newEvent]);
+  }, [newEvent, hero]);
 
   const onClickCategory = (category: Category, isSelectedString: string) => {
     if (isSelectedString) {

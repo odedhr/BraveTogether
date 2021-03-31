@@ -41,9 +41,7 @@ export const postNewEvent = (eventData: Event) => {
     request: {
       url,
       method: "POST",
-      data: {
-        eventData,
-      },
+      data: eventData,
     },
     logic: {
       onFailed: (error, dispatch) => {},

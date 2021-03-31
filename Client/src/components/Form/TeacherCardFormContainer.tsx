@@ -9,6 +9,7 @@ const mapStateToProps = (state: Store) => {
     categories: state.entities.categories,
     newEvent: state.events.newEvent,
     user: state.user,
+    hero: state.hero,
   };
 };
 const mapDispatchToProps = (dispatch: Dispatch) =>

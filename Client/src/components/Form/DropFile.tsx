@@ -1,4 +1,3 @@
-import { black } from "material-ui/styles/colors";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
@@ -12,7 +11,7 @@ const TextInsideDrop = styled.div`
   text-align: center;
   direction: rtl;
 `;
-export default function Accept(props: Props) {
+export default function DropFile(props: Props) {
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } = useDropzone({
     accept: "image/jpeg, image/png",
   });

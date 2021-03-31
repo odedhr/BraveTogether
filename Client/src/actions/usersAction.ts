@@ -76,7 +76,7 @@ export const tokenRequest = (username: string, password: string) => {
   });
 };
 export const loginRequest = (username: string) => {
-  const url = makeApiUrl("users/" + username);
+  const url = makeApiUrl("users/by-email/" + username);
   return apiAction({
     request: {
       url,
@@ -85,7 +85,7 @@ export const loginRequest = (username: string) => {
       onFailed: (error, dispatch) => dispatch(loginUserAction.failure(error)),
       onSuccess: (data, dispatch) => {
         console.log(data);
-        dispatch(loginUserAction.success(data));
+        if (!data.error) dispatch(loginUserAction.success(data.user));
       },
       onStarted: () => {},
     },
