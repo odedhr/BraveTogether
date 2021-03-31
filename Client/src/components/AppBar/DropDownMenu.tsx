@@ -1,11 +1,8 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Menu, { MenuProps } from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import styled from "styled-components";
-import ListItemText from "@material-ui/core/ListItemText";
-
+import { DropDownMenuProps } from "./DropDownMenuContainer";
 import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
 
 const StyledMenu = withStyles({
@@ -39,11 +36,15 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function DropDownMenu() {
+export default function DropDownMenu(props: DropDownMenuProps) {
+  const { isLoggedIn } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
+  const [isModalOpen, setOpenModal] = useState(false);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+    if (isLoggedIn) setAnchorEl(event.currentTarget);
+    else {
+      setOpenModal(true);
+    }
   };
 
   const handleClose = () => {
@@ -84,6 +85,13 @@ export default function DropDownMenu() {
           <div>התנתק</div>
         </StyledMenuItem>
       </StyledMenu>
+      <Popup isModalOpen={isModalOpen} closePopup={(isOpen: boolean) => setOpenModal(isOpen)}>
+        <>
+          <div>?איך מתחילים ללמד</div>
+          <div>הצטרפו למיזם שלנו והוסיפו מורים גיבורי שואה</div>
+          <Login></Login>
+        </>
+      </Popup>
     </div>
   );
 }

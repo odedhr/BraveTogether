@@ -15,4 +15,14 @@ export default {
     events: [],
     newEvent: undefined,
   },
+  user: {
+    firstName: undefined,
+    lastName: undefined,
+    email: undefined,
+    phone: undefined,
+    CriminalBackGroundCheck: undefined,
+    userAgreement: undefined,
+    id: undefined,
+    token: undefined,
+  },
 } as Store;

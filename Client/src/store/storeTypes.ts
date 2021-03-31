@@ -18,7 +18,18 @@ export type Events = {
   events: Event[];
   newEvent: Event | undefined;
 };
+export type User = {
+  firstName: string | undefined;
+  lastName: string | undefined;
+  email: string | undefined;
+  phone: string | undefined;
+  CriminalBackGroundCheck: boolean | undefined;
+  userAgreement: boolean | undefined;
+  id: string | undefined;
+  token:string|undefined;
+};
 export type Store = {
   entities: Entities;
   events: Events;
+  user: User;
 };
