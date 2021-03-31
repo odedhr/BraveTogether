@@ -17,6 +17,7 @@ export type UserPost = {
   is_manager: boolean;
   has_criminal_record: boolean;
   has_committed_to_privacy: boolean;
+  has_applied_for_manager: boolean;
 };
 export const registerUserRequset = (user: UserPost) => {
   const url = makeApiUrl("users/");

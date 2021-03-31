@@ -44,7 +44,7 @@ export default function SignUpForm(props: SignUpFormProps) {
   const { registerUserRequset } = props;
   const { register, handleSubmit, errors } = useForm({ mode: "onSubmit" });
   const onSubmit = (data: FormInput) => {
-    const user: UserPost = { ...data, is_manager: true };
+    const user: UserPost = { ...data, is_manager: true, has_applied_for_manager: true };
     registerUserRequset(user);
   };
   return (
