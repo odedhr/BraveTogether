@@ -78,9 +78,6 @@
     "User": {
       "type": "object",
       "properties": {
-        "user_id": {
-          "type": "integer"
-        },
         "is_manager": {
           "type": "boolean"
         },
@@ -93,9 +90,43 @@
         "image": {
           "type": "string"
         }
-      },
-      "xml": {
-        "name": "Order"
+      }
+    },
+    "Hero": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "manager_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "string"
+        },
+        "long": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "hero_id": {
+          "type": "integer"
+        },
+        "manager_id": {
+          "type": "integer"
+        }
       }
     }
   },
