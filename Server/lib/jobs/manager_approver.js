@@ -1,5 +1,6 @@
 const creds = require('../../config/sheets.json');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
+const { User } = require('../../models');
 
 module.exports = {
   work: async () => {
@@ -12,5 +13,18 @@ module.exports = {
     await doc.loadInfo()
     const sheet = doc.sheetsByIndex[0];
     const rows = await sheet.getRows();
+
+    rows.forEach(async row => {
+      if (row['is_approved'].toLowerCase() == 'true' && row['is_manager'].toLowerCase() == 'false') {
+        await User.update({ is_manager: true }, {
+          where: { 
+            email: row['email']
+          }
+        });
+        row['is_manager'] = true
+        await row.save()
+        console.log(`User with email ${row['email']} is now a manager!`);
+      }
+    })
   }
 }

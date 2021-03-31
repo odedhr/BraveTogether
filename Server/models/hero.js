@@ -18,12 +18,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    first_name: {
+    full_name: {
       allowNull: false,
       type: DataTypes.STRING
     },
-    last_name: {
-      allowNull: false,
+    speciality: {
       type: DataTypes.STRING
     },
     description: {

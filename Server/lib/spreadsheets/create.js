@@ -17,8 +17,12 @@ const create = async () => {
     'cellphone',
     'has_criminal_record',
     'has_committed_to_privacy',
+    'application_submitted_at',
+    'is_manager',
     'is_approved'
   ]);
+
+  console.log('Spreadsheet is all set!');
 }
 
 create()
