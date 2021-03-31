@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
+    has_applied_for_manager: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },  
     has_criminal_record: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

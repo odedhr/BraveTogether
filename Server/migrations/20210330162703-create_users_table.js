@@ -18,6 +18,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
+      has_applied_for_manager: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       has_criminal_record: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
