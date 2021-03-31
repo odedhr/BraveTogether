@@ -17,11 +17,24 @@ export type RegisterResponseData = {
     image: string | null;
   };
 };
+export type Token = {
+  token: string;
+};
 export const registerUser = createAsyncAction(
   "REGISTER_USER_STARTED",
   "REGISTER_USER_SUCCESS",
   "REGISTER_USER_FAILED"
 )<any, RegisterResponseData, any>();
+export const tokenRequestAction = createAsyncAction(
+  "LOGIN_USER_STARTED",
+  "LOGIN_USER_SUCCESS",
+  "LOGIN_USER_FAILED"
+)<any, Token, any>();
+export const loginUserAction = createAsyncAction(
+  "LOGIN_USER_STARTED",
+  "LOGIN_USER_SUCCESS",
+  "LOGIN_USER_FAILED"
+)<any, Token, any>();
 export const convertAddressToLocationAC = createAsyncAction(
   "CONVERT_ADDRESS_STARTED",
   "CONVERT_ADDRESS_SUCCESS",

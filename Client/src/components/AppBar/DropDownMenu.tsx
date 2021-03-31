@@ -39,18 +39,18 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 export default function DropDownMenu(props: DropDownMenuProps) {
-  const { isLoggedIn, managerSignedUp } = props;
+  const { managerLoggedIn, managerSignedUp } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [isLoginModalOpen, setOpenLoginModal] = React.useState(false);
   const [isRegisterTeacherModalOpen, setRegisterTeacherModalOpen] = React.useState(false);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    if (isLoggedIn) setAnchorEl(event.currentTarget);
+    if (managerLoggedIn) setAnchorEl(event.currentTarget);
     else {
       setOpenLoginModal(true);
     }
   };
   React.useEffect(() => {
-    if (managerSignedUp) {
+    if (managerSignedUp || managerLoggedIn) {
       setOpenLoginModal(false);
     }
   }, [managerSignedUp]);

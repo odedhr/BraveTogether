@@ -11,6 +11,10 @@ export interface ApiRequest {
   headers?: object;
   params?: any;
   responseType?: ResponseType;
+  auth?: {
+    username: string;
+    password: string;
+  };
 }
 
 export interface ApiActionLogic {
@@ -55,9 +59,9 @@ export default function apiAction(conf: ApiActionConfig) {
     logic.onStarted(dispatch, state, request.data);
     try {
       pendingRequests.set(requestId, tokenSource);
-
       const response = await axios.request({
         ...request,
+        auth: request.auth,
         cancelToken: tokenSource?.token,
       } as AxiosRequestConfig);
       logic.onSuccess(response.data, dispatch, state);

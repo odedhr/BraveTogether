@@ -37,9 +37,9 @@ interface FormInput {
 }
 
 export default function SignInForm(props: SignInFormProps) {
-  const { loginRequest } = props;
+  const { tokenRequest } = props;
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = ({ username, password }: FormInput) => loginRequest(username, password);
+  const onSubmit = ({ username, password }: FormInput) => tokenRequest(username, password);
   return (
     <div>
       <FormFrame onSubmit={handleSubmit(onSubmit)}>
