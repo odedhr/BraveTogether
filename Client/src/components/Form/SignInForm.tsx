@@ -5,10 +5,10 @@ import { SignInFormProps } from "./SignInFormContainer";
 
 const InputBox = styled.input<any>`
   border: none;
-  border-radius: 10%;
-  margin-bottom: 5%;
-  padding-bottom: 5%;
-  //padding-left: 3%;
+  border-radius: 7px;
+  margin: 9px 49px 5px 20px;
+  padding: 9px 30px;
+  width: 30%;
   background-color: #f0f0f0;
   text-align: right;
 `;
@@ -20,10 +20,15 @@ const InputCheckBox = styled.input`
 const InputCheckBoxLabel = styled.label``;
 
 const SubmitButton = styled.input`
-  padding-left: 5%;
-  padding-bottom: 1%;
-  border-radius: 1%;
-  background-color: #80ced7;
+  padding: 10px 15px;
+  margin: 15px 47px;
+  background-color: #048ba8;
+  width: 15%;
+  min-width:fit-content;
+  color:white;
+  border:none;
+  border-radius: 12px;
+  font-size: 17px;
 `;
 
 const FormFrame = styled.form`
