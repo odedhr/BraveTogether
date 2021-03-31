@@ -23,6 +23,6 @@ export default {
     CriminalBackGroundCheck: undefined,
     userAgreement: undefined,
     id: undefined,
-    token: "asdfdsafsda",
+    token: undefined,
   },
 } as Store;

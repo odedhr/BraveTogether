@@ -14,6 +14,8 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    width: "100%",
+    height: "80%",
   },
 };
 
@@ -38,8 +40,10 @@ export default function Popup(props: IPopupProps) {
     };
   }, [wrapperRef]);
   return (
-    <Modal isOpen={isModalOpen} style={customStyles} contentLabel="Example Popu">
-      <div ref={wrapperRef}>{props.children}</div>
+    <Modal isOpen={isModalOpen} style={customStyles}>
+      <div style={{ width: "100%", height: "100%" }} ref={wrapperRef}>
+        {props.children}
+      </div>
     </Modal>
   );
 }

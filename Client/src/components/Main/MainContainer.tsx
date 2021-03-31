@@ -3,8 +3,8 @@ import { bindActionCreators, Dispatch } from "redux";
 import Main from "./Main";
 import { Store } from "../../store/storeTypes";
 import { selectCategory } from "../../actions/entitiesActions";
+import { convertAddressToLocation } from "../../actions/usersAction";
 const mapStateToProps = (state: Store) => {
-  console.log(state);
   return {
     categories: state.entities.categories,
     selectedCategories: state.entities.selectedCategory,
@@ -14,6 +14,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       selectCategory,
+      convertAddressToLocation,
     },
     dispatch
   );

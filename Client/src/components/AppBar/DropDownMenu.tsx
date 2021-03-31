@@ -6,7 +6,7 @@ import { DropDownMenuProps } from "./DropDownMenuContainer";
 import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
 import Popup from "../Modal/Modal";
 import Login from "../Login/Login";
-import TeacherCardForm from "../Form/TeacherCardForm";
+import TeacherCardForm from "../Form/TeacherCardFormContainer";
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
@@ -74,7 +74,12 @@ export default function DropDownMenu(props: DropDownMenuProps) {
         <StyledMenuItem>
           <div>מורים שפנית אליהם</div>
         </StyledMenuItem>
-        <StyledMenuItem onClick={() => setRegisterTeacherModalOpen(true)}>
+        <StyledMenuItem
+          onClick={() => {
+            setRegisterTeacherModalOpen(true);
+            handleClose();
+          }}
+        >
           <div>הוספת מורה</div>
         </StyledMenuItem>
         <StyledMenuItem>
