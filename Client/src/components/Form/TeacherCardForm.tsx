@@ -27,17 +27,12 @@ export default function TeacherCardForm() {
         name="fullName"
         ref={register({ required: true, max: 15, min: 2 })}
       />
-      <input
-        type="text"
-        placeholder="כתובת? רחוב ועיר יספיקו"
-        name="address"
-        ref={register}
-      />
+      <input type="text" placeholder="כתובת? רחוב ועיר יספיקו" name="address" ref={register} />
       <textarea
         name="ספרו לנו על הגיבור"
-        ref={register({ required: true, max: 0, maxLength: 30 })}
+        ref={register({ required: true, max: 0, maxLength: 60 })}
       />
-      <input type ="file"/>
+      <input type="file" />
       <input type="submit" />
     </form>
   );

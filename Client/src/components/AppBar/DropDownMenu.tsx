@@ -6,6 +6,7 @@ import { DropDownMenuProps } from "./DropDownMenuContainer";
 import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
 import Popup from "../Modal/Modal";
 import Login from "../Login/Login";
+import TeacherCardForm from "../Form/TeacherCardForm";
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
@@ -40,11 +41,12 @@ const StyledMenuItem = withStyles((theme) => ({
 export default function DropDownMenu(props: DropDownMenuProps) {
   const { isLoggedIn } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [isModalOpen, setOpenModal] = React.useState(false);
+  const [isLoginModalOpen, setOpenLoginModal] = React.useState(false);
+  const [isRegisterTeacherModalOpen, setRegisterTeacherModalOpen] = React.useState(false);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (isLoggedIn) setAnchorEl(event.currentTarget);
     else {
-      setOpenModal(true);
+      setOpenLoginModal(true);
     }
   };
 
@@ -72,8 +74,8 @@ export default function DropDownMenu(props: DropDownMenuProps) {
         <StyledMenuItem>
           <div>מורים שפנית אליהם</div>
         </StyledMenuItem>
-        <StyledMenuItem>
-          <div>מורים שפנית אליהם</div>
+        <StyledMenuItem onClick={() => setRegisterTeacherModalOpen(true)}>
+          <div>הוספת מורה</div>
         </StyledMenuItem>
         <StyledMenuItem>
           <div>מורים שהוספת</div>
@@ -86,12 +88,21 @@ export default function DropDownMenu(props: DropDownMenuProps) {
           <div>התנתק</div>
         </StyledMenuItem>
       </StyledMenu>
-      <Popup isModalOpen={isModalOpen} closePopup={(isOpen: boolean) => setOpenModal(isOpen)}>
+      <Popup
+        isModalOpen={isLoginModalOpen}
+        closePopup={(isOpen: boolean) => setOpenLoginModal(isOpen)}
+      >
         <>
           <div>?איך מתחילים ללמד</div>
           <div>הצטרפו למיזם שלנו והוסיפו מורים גיבורי שואה</div>
           <Login></Login>
         </>
+      </Popup>
+      <Popup
+        isModalOpen={isRegisterTeacherModalOpen}
+        closePopup={(isOpen: boolean) => setRegisterTeacherModalOpen(isOpen)}
+      >
+        <TeacherCardForm />
       </Popup>
     </div>
   );
