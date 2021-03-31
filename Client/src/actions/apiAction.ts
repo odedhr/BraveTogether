@@ -53,7 +53,6 @@ export default function apiAction(conf: ApiActionConfig) {
     request.method = request.method || "GET";
 
     const contentTypeHeader = {
-      //@ts-ignore
       "Content-Type": request.data instanceof FormData ? "multipart/form-data" : "application/json",
     };
 
