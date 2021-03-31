@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-const { User } = require("../models");
-const axios = require("axios");
-=======
 const { User } = require('../models');
 const axios = require('axios');
 // const Spreadsheet = require('../lib/spreadsheets');
@@ -41,7 +37,6 @@ const doc = new GoogleSpreadsheet('1faQ3RpYZhCftCX4yDFbtEdtd7DkG6hkI2Ce2-jeC3bs'
   //   is_approved: req.body.is_approved
   // });
 // }
->>>>>>> Add events code
 
 module.exports = {
   fetchAll: async (req, res) => {
@@ -86,11 +81,6 @@ module.exports = {
     res.send(content);
   },
   create: async (req, res) => {
-<<<<<<< HEAD
-    // TODO: Sync with the API
-    console.log(req.body);
-=======
->>>>>>> Add events code
     try {
       var apiUser = await axios.post(
         "http://127.0.0.1:5000/user",
@@ -114,9 +104,6 @@ module.exports = {
         image: req.file ? req.file.path : null,
       });
 
-<<<<<<< HEAD
-      res.send({
-=======
       // if (req.body.has_applied_for_manager) {
       //   addRow2({
       //     first_name: req.body.first_name,
@@ -130,25 +117,16 @@ module.exports = {
       // }
     
       res.status(201).send({
->>>>>>> Add events code
         error: false,
         message: "User successfully added",
         api_user: apiUser ? apiUser.data : {},
         user: user,
       });
     } catch (err) {
-<<<<<<< HEAD
       res.send({
         error: true,
-        message: err.response.data.message,
+        message: err.response.data.message
       });
-=======
-      console.log(err)
-      // res.send({
-      //   error: true,
-      //   message: err.response.data.message
-      // });
->>>>>>> Add events code
     }
   },
 };
