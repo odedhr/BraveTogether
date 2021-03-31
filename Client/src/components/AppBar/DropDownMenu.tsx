@@ -102,8 +102,8 @@ export default function DropDownMenu(props: DropDownMenuProps) {
         closePopup={(isOpen: boolean) => setOpenLoginModal(isOpen)}
       >
         <>
-          <div>?איך מתחילים ללמד</div>
-          <div>הצטרפו למיזם שלנו והוסיפו מורים גיבורי שואה</div>
+          <div style= {{textAlign:"center", marginBottom:"10px", fontSize:"30px", fontWeight:"bold"}}>?איך מתחילים ללמד</div>
+          <div style= {{textAlign:"center", marginBottom:"25px" }}>הצטרפו למיזם שלנו והוסיפו מורים גיבורי שואה</div>
           <Login></Login>
         </>
       </Popup>
