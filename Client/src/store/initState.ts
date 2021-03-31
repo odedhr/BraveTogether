@@ -15,6 +15,7 @@ export default {
     events: [],
     newEvent: undefined,
   },
+
   user: {
     firstName: undefined,
     lastName: undefined,
@@ -25,5 +26,14 @@ export default {
     id: undefined,
     token: undefined,
     is_manager: false,
+  },
+
+  hero: {
+    description: undefined,
+    fullName: undefined,
+    location: undefined,
+    manager_id: undefined,
+    speciality: undefined,
+    id: undefined,
   },
 } as Store;

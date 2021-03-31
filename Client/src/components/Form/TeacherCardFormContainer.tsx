@@ -2,15 +2,21 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import TeacherCardForm from "./TeacherCardForm";
 import { Store } from "../../store/storeTypes";
-import { convertAddressToLocation } from "../../actions/usersAction";
+import { convertAddressToLocationThenCreateEvent, postNewEvent } from "../../actions/eventsActions";
+import { createHeroRequset } from "../../actions/usersAction";
 const mapStateToProps = (state: Store) => {
   return {
     categories: state.entities.categories,
     newEvent: state.events.newEvent,
+    user: state.user,
+    hero: state.hero,
   };
 };
 const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({ convertAddressToLocation }, dispatch);
+  bindActionCreators(
+    { convertAddressToLocationThenCreateEvent, postNewEvent, createHeroRequset },
+    dispatch
+  );
 
 export type TeacherCardFormProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;

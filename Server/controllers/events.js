@@ -1,5 +1,5 @@
-const { Event } = require('../models');
-const axios = require('axios');
+const { Event } = require("../models");
+const axios = require("axios");
 
 module.exports = {
   fetchAll: async (req, res) => {
@@ -41,27 +41,32 @@ module.exports = {
     res.send(content);
   },
   create: async (req, res) => {
+    console.log(req.body);
     try {
-      var apiEvent = await axios.post('http://127.0.0.1:5000/events', {
-        tags: req.body.tags,
-        title: req.body.title,
-        description: req.body.description,
-        start_time: req.body.start_time,
-        end_time: req.body.end_time,
-        reward: req.body.reward
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
+      var apiEvent = await axios.post(
+        "http://127.0.0.1:5000/events",
+        {
+          tags: req.body.tags,
+          title: req.body.title,
+          description: req.body.description,
+          start_time: req.body.start_time,
+          end_time: req.body.end_time,
+          reward: req.body.reward,
         },
-        auth: {
-          username: req.body.token,
-          password: ''
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          auth: {
+            username: req.body.token,
+            password: "",
+          },
         }
-      });
+      );
 
       var event = await Event.create({
         ...req.body,
-        event_id: apiEvent.data.id
+        event_id: apiEvent.data.id,
       });
 
       const mergedEvent = {
@@ -78,8 +83,8 @@ module.exports = {
       console.log(err);
       res.send({
         error: true,
-        message: err.response.data.message
+        message: err.response.data.message,
       });
     }
-  }
+  },
 };
