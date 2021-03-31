@@ -2,6 +2,44 @@ const { Event } = require('../models');
 const axios = require('axios');
 
 module.exports = {
+  fetchAll: async (req, res) => {
+    const content = {
+      error: false,
+      message: "Events successfully fetched",
+    };
+
+    try {
+      const events = await Event.findAll({ include: ["hero", "manager"] });
+      content.events = events;
+    } catch (error) {
+      content.error = true;
+      content.message = error.message;
+    }
+
+    res.send(content);
+  },
+  fetchOne: async (req, res) => {
+    const content = {
+      error: false,
+      message: `Event with id #${req.params.id} successfully fetched`,
+    };
+
+    try {
+      const event = await Event.findOne(
+        { where: { event_id: req.params.id } },
+        {
+          include: ["hero", "manager"],
+        }
+      );
+      // TODO: mapper that will merge the two event data objects
+      content.event = event;
+    } catch (error) {
+      content.error = true;
+      content.message = error.message;
+    }
+
+    res.send(content);
+  },
   create: async (req, res) => {
     try {
       var apiEvent = await axios.post('http://127.0.0.1:5000/events', {
@@ -21,7 +59,10 @@ module.exports = {
         }
       });
 
-      var event = await Event.create(req.body);
+      var event = await Event.create({
+        ...req.body,
+        event_id: apiEvent.data.id
+      });
 
       res.status(201).send({
         error: false,
