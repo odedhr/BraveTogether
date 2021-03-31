@@ -74,11 +74,12 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
   const onSubmit = (data: TeacherInput) => {
     const hero = new FormData();
 
-    hero.append("file", files[0]);
+    hero.append("image", files[0]);
     hero.append("token", user.token!);
-    hero.append("first_name", "sdfs");
-    hero.append("last_name", "gfdgfds");
+    hero.append("full_name", data.fullName);
     hero.append("manager_id", user.id!);
+    hero.append("speciality", data.speciality);
+    hero.append("location", data.location);
 
     createHeroRequset(hero as any);
     convertAddressToLocationThenCreateEvent(data.location);

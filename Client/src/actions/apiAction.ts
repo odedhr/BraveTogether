@@ -54,7 +54,7 @@ export default function apiAction(conf: ApiActionConfig) {
 
     const contentTypeHeader = {
       //@ts-ignore
-      "Content-Type": request.data?.file ? "multipart/form-data" : "application/json",
+      "Content-Type": request.data instanceof FormData ? "multipart/form-data" : "application/json",
     };
 
     request.headers = { ...contentTypeHeader, ...request.headers };
