@@ -3,7 +3,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import Main from "./Main";
 import { Store } from "../../store/storeTypes";
 import { selectCategory } from "../../actions/entitiesActions";
-import { convertAddressToLocationThenCreateEvent } from "../../actions/eventsActions";
+import { convertAddressToLocationThenCreateEvent, getAllEvents } from "../../actions/eventsActions";
 const mapStateToProps = (state: Store) => {
   return {
     categories: state.entities.categories,
@@ -17,6 +17,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     {
       selectCategory,
       convertAddressToLocationThenCreateEvent,
+      getAllEvents,
     },
     dispatch
   );

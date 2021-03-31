@@ -16,7 +16,7 @@ const MapWrapper = styled.div`
   align-items: center;
 `;
 export default function Map(props: MapProps) {
-  const { openModal, createNewEvent } = props;
+  const { events } = props;
   const AnyReactComponent = ({ text }: any) => <div>{text}</div>;
   const [markers, setMarkers] = React.useState<any>([]);
   const [creatingEvent, setCreatingEvent] = React.useState(false);
@@ -58,8 +58,8 @@ export default function Map(props: MapProps) {
           defaultZoom={defaultProps.zoom}
           onClick={(value: GoogleMapReact.ClickEventValue) => onMapClick(value.lat, value.lng)}
         >
-          {markers.map((marker: any) => {
-            return <AnyReactComponent lat={marker.lat} lng={marker.lng} text="My Marker" />;
+          {events.map((marker) => {
+            return <AnyReactComponent lat={marker.lat} lng={marker.long} text="My Marker" />;
           })}
         </GoogleMapReact>
       </div>
