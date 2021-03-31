@@ -1,7 +1,12 @@
 import { User } from "../store/storeTypes";
 import { makeApiUrl } from "./utils";
 import apiAction from "./apiAction";
-import { convertAddressToLocationAC, registerUser } from "./types/userActionTypes";
+import {
+  convertAddressToLocationAC,
+  loginUserAction,
+  registerUser,
+  tokenRequestAction,
+} from "./types/userActionTypes";
 export type UserPost = {
   email: string;
   password: string;
@@ -31,21 +36,38 @@ export const registerUserRequset = (user: UserPost) => {
     },
   });
 };
-export const loginRequest = (username: string, password: string) => {
-  const url = makeApiUrl("http://localhost:5000/token");
+export const tokenRequest = (username: string, password: string) => {
+  const url = "http://localhost:5000/token";
   return apiAction({
     request: {
       url,
-      headers: {
-        auth: {
-          username,
-          password,
-        },
+      auth: {
+        username,
+        password,
       },
     },
     logic: {
-      onFailed: (error, dispatch) => console.log(error),
-      onSuccess: (data, dispatch) => console.log(data),
+      onFailed: (error, dispatch) => dispatch(tokenRequestAction.failure(error)),
+      onSuccess: (data, dispatch) => {
+        loginRequest(username);
+        dispatch(tokenRequestAction.success(data));
+      },
+      onStarted: () => {},
+    },
+  });
+};
+export const loginRequest = (username: string) => {
+  const url = makeApiUrl("/user/" + username);
+  return apiAction({
+    request: {
+      url,
+    },
+    logic: {
+      onFailed: (error, dispatch) => dispatch(loginUserAction.failure(error)),
+      onSuccess: (data, dispatch) => {
+        console.log(data);
+        dispatch(loginUserAction.success(data));
+      },
       onStarted: () => {},
     },
   });

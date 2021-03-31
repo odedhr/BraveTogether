@@ -9,6 +9,7 @@ const mapStateToProps = (state: Store) => {
     categories: state.entities.categories,
     selectedCategories: state.entities.selectedCategory,
     managerSignedUp: state.user.is_manager && state.user.token == "",
+    managerLoggedIn: state.user.is_manager && state.user.token,
   };
 };
 const mapDispatchToProps = (dispatch: Dispatch) =>
