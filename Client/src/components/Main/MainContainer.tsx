@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import Main from "./Main";
 import { Store } from "../../store/storeTypes";
-import { selectCategory } from "../../actions/entitiesAction";
+import { selectCategory } from "../../actions/entitiesActions";
 const mapStateToProps = (state: Store) => {
   console.log(state);
   return {

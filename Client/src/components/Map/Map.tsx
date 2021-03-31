@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
-export interface IMapProps {
-  openModal: () => void;
-}
+import { MapProps } from "./MapContainer";
+
 const StyledButton = styled(Button)`
   width: 100px;
 `;
@@ -14,9 +13,10 @@ const MapWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
 `;
-export default function Map(props: IMapProps) {
-  const { openModal } = props;
+export default function Map(props: MapProps) {
+  const { openModal, createNewEvent } = props;
   const AnyReactComponent = ({ text }: any) => <div>{text}</div>;
   const [markers, setMarkers] = React.useState<any>([]);
   const [creatingEvent, setCreatingEvent] = React.useState(false);
@@ -28,15 +28,16 @@ export default function Map(props: IMapProps) {
     },
     zoom: 11,
   };
-  const onMapClick = (lat: number, lng: number) => {
+  const onMapClick = (lat: number, long: number) => {
     if (creatingEvent) {
       setCreatingEvent(false);
-      openModal();
+      // openModal();
+      // createNewEvent({ address: "", hero: "", lat, long, manager_id: "", topic: "" });
       setMarkers([
         ...markers,
         {
           lat,
-          lng,
+          long,
         },
       ]);
     }
@@ -46,9 +47,9 @@ export default function Map(props: IMapProps) {
   };
   return (
     <MapWrapper>
-      <StyledButton onClick={onCreateEventButton} variant="contained" color="primary">
+      {/* <StyledButton onClick={onCreateEventButton} variant="contained" color="primary">
         צור מפגש
-      </StyledButton>
+      </StyledButton> */}
       <div style={{ height: "800px", width: "90%", cursor: "crosshair" }}>
         <GoogleMapReact
           ref={map}
