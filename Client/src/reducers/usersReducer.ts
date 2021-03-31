@@ -2,6 +2,7 @@ import initialState from "../store/initState";
 import { Store, User } from "../store/storeTypes";
 import { createReducer } from "typesafe-actions";
 import {
+  loginUserAction,
   RegisterResponseData,
   registerUser,
   Token,
@@ -39,9 +40,10 @@ const reducer = createReducer<User, any>(initialState.user)
   .handleAction(tokenRequestAction.success, (state: Store, action: { payload: Token }) => {
     const { payload } = action;
     return { ...state, token: payload.token };
+  })
+  .handleAction(loginUserAction.success, (state: Store, action: { payload: Token }) => {
+    const { payload } = action;
+    console.log(payload);
+    return { ...state, ...payload };
   });
-// .handleAction(loginUserAction.success, (state: Store, action: { payload: Token }) => {
-//   const { payload } = action;
-//   return { ...state, token: payload.token };
-// });
 export default reducer;

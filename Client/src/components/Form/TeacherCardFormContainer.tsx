@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import TeacherCardForm from "./TeacherCardForm";
 import { Store } from "../../store/storeTypes";
-import { convertAddressToLocation } from "../../actions/usersAction";
+import { convertAddressToLocationThenCreateEvent } from "../../actions/usersAction";
 const mapStateToProps = (state: Store) => {
   return {
     categories: state.entities.categories,
@@ -10,7 +10,7 @@ const mapStateToProps = (state: Store) => {
   };
 };
 const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({ convertAddressToLocation }, dispatch);
+  bindActionCreators({ convertAddressToLocationThenCreateEvent }, dispatch);
 
 export type TeacherCardFormProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;

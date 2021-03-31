@@ -37,6 +37,7 @@ const pendingRequests = new Map<string, CancelTokenSource>();
 
 export default function apiAction(conf: ApiActionConfig) {
   const { request, logic, interceptor } = conf;
+
   return async function (dispatch: ThunkDispatch<Store, any, Action>, getState: () => Store) {
     let tokenSource: CancelTokenSource | undefined;
     const state = getState();

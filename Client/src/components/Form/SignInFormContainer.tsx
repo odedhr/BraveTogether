@@ -2,12 +2,15 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import SignInForm from "./SignInForm";
 import { Store } from "../../store/storeTypes";
-import { tokenRequest } from "../../actions/usersAction";
-const mapStateToProps = (state: Store) => ({});
+import { tokenRequest, loginRequest } from "../../actions/usersAction";
+const mapStateToProps = (state: Store) => ({
+  token: state.user.token,
+});
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       tokenRequest,
+      loginRequest,
     },
     dispatch
   );

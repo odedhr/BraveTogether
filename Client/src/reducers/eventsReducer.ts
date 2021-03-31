@@ -3,7 +3,7 @@ import initialState from "../store/initState";
 import { Events, Store } from "../store/storeTypes";
 import * as actionStringsTypes from "../actions/types/actionStringsTypes";
 import { createReducer } from "typesafe-actions";
-import { convertAddressToLocationAC } from "../actions/types/userActionTypes";
+import { convertAddressToLocationThenCreateEventAC } from "../actions/types/userActionTypes";
 
 // export default function EventsReducer(
 //   state: Events = initialState.events,
@@ -21,9 +21,8 @@ import { convertAddressToLocationAC } from "../actions/types/userActionTypes";
 //   }
 // }
 const reducer = createReducer<Events, any>(initialState.events).handleAction(
-  convertAddressToLocationAC.success,
+  convertAddressToLocationThenCreateEventAC.success,
   (state: Events, action: any) => {
-    console.log(action);
     return {
       ...state,
       newEvent: { ...state.newEvent, long: action.payload.longitude, lat: action.payload.latitude },

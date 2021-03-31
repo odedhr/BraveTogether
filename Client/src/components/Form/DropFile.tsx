@@ -16,7 +16,9 @@ export default function Accept(props: Props) {
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } = useDropzone({
     accept: "image/jpeg, image/png",
   });
-
+  React.useEffect(() => {
+    if (acceptedFiles.length > 0) props.getFiles(acceptedFiles);
+  }, [acceptedFiles]);
   return (
     <section className="container">
       <div
@@ -36,13 +38,12 @@ export default function Accept(props: Props) {
             height: "70px",
             width: "70px",
           }}
-          onChange={() => acceptedFiles && props.getFiles(acceptedFiles)}
           {...getInputProps()}
         />
         {acceptedFiles.length > 0 ? (
           <img
-            height={70}
-            width={70}
+            height={120}
+            width={120}
             src={URL.createObjectURL(acceptedFiles[0])}
             style={{ borderRadius: "50%" }}
           />

@@ -5,12 +5,12 @@ import DropFile from "./DropFile";
 import { CategoriesRenderer, InTheNextDay, SubTitle, Title } from "../Main/Main";
 import { TeacherCardFormProps } from "./TeacherCardFormContainer";
 import { Category } from "../../store/storeTypes";
-interface TeacherInput {
+export type TeacherInput = {
   speciality: string;
   fullName: string;
   about: string;
   address: string;
-}
+};
 
 const StyledForm = styled.form`
   display: "flex";
@@ -49,20 +49,14 @@ const TextArea = styled.textarea`
   border: none;
 `;
 export default function TeacherCardForm(props: TeacherCardFormProps) {
-  const { categories, convertAddressToLocation, newEvent } = props;
+  const { categories, convertAddressToLocationThenCreateEvent, newEvent } = props;
   const [selectedCategories, setSelectedCategories] = React.useState<string[]>([]);
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data: TeacherInput) => {
-    convertAddressToLocation(data.address);
-  };
-  React.useEffect(() => {
-    if (newEvent && newEvent.long && newEvent.topic) {
-    }
-  }, [newEvent]);
   const [files, setFiles] = React.useState<File[]>([]);
-  const getFiles = (filesFromDropZone: File[]) => {
-    setFiles(filesFromDropZone);
+  const onSubmit = (data: TeacherInput) => {
+    convertAddressToLocationThenCreateEvent(data.address, data);
   };
+
   const onClickCategory = (category: Category, isSelectedString: string) => {
     if (isSelectedString) {
       const newCategories = selectedCategories!.filter((selectedCategory) => {
@@ -77,6 +71,9 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
       setSelectedCategories(categories);
     }
   };
+  const getFiles = (filesFromDropZone: File[]) => {
+    setFiles(filesFromDropZone);
+  };
   return (
     <div
       style={{
@@ -88,7 +85,7 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
         alignItems: "center",
       }}
     >
-      <Title>בוא נוסיך את המורה שלך (ובקרוב שלנו)</Title>
+      <Title>בוא נוסיף את המורה שלך (ובקרוב שלנו)</Title>
       <InTheNextDay>במה המורה מתמחה?</InTheNextDay>
       {CategoriesRenderer(categories, selectedCategories, onClickCategory)}
       <FormWrapper>
@@ -99,14 +96,14 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
           <Input
             type="text"
             placeholder="מומחיות ספציפית?"
-            name="fullName"
+            name="speciality"
             ref={register({ required: true, max: 15, min: 2 })}
             isBold={true}
           />
           <Input
             type="text"
             placeholder="מה שם המורה?"
-            name="fullName"
+            name="hero_name"
             ref={register({ required: true, max: 15, min: 2 })}
           />
           <Input type="text" placeholder="כתובת? רחוב ועיר יספיקו" name="address" ref={register} />

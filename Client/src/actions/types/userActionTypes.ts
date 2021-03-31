@@ -35,9 +35,11 @@ export const loginUserAction = createAsyncAction(
   "LOGIN_USER_SUCCESS",
   "LOGIN_USER_FAILED"
 )<any, Token, any>();
-export const convertAddressToLocationAC = createAsyncAction(
+export const convertAddressToLocationThenCreateEventAC = createAsyncAction(
   "CONVERT_ADDRESS_STARTED",
   "CONVERT_ADDRESS_SUCCESS",
   "CONVERT_ADDRESS_FAILED"
 )<any, any, any>();
-export type UserActionTypes = typeof registerUser | typeof convertAddressToLocationAC;
+export type UserActionTypes =
+  | typeof registerUser
+  | typeof convertAddressToLocationThenCreateEventAC;

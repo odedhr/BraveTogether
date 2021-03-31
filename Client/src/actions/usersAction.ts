@@ -2,11 +2,12 @@ import { User } from "../store/storeTypes";
 import { makeApiUrl } from "./utils";
 import apiAction from "./apiAction";
 import {
-  convertAddressToLocationAC,
+  convertAddressToLocationThenCreateEventAC,
   loginUserAction,
   registerUser,
   tokenRequestAction,
 } from "./types/userActionTypes";
+import { TeacherInput } from "../components/Form/TeacherCardForm";
 export type UserPost = {
   email: string;
   password: string;
@@ -57,7 +58,7 @@ export const tokenRequest = (username: string, password: string) => {
   });
 };
 export const loginRequest = (username: string) => {
-  const url = makeApiUrl("/user/" + username);
+  const url = makeApiUrl("users/" + username);
   return apiAction({
     request: {
       url,
@@ -72,7 +73,10 @@ export const loginRequest = (username: string) => {
     },
   });
 };
-export const convertAddressToLocation = (address: string) => {
+export const convertAddressToLocationThenCreateEvent = (
+  address: string,
+  eventData: TeacherInput
+) => {
   const url = "http://api.positionstack.com/v1/forward";
   return apiAction({
     request: {
@@ -83,9 +87,36 @@ export const convertAddressToLocation = (address: string) => {
       },
     },
     logic: {
-      onFailed: (error, dispatch) => dispatch(convertAddressToLocationAC.failure(error)),
+      onFailed: (error, dispatch) =>
+        dispatch(convertAddressToLocationThenCreateEventAC.failure(error)),
       onSuccess: (data, dispatch) => {
-        dispatch(convertAddressToLocationAC.success(data.data[0]));
+        const eventDataWithLocation = {
+          ...eventData,
+          long: data.data[0].longitude,
+          lat: data.data[0].latitude,
+        };
+        postNewEvent(eventDataWithLocation);
+        dispatch(convertAddressToLocationThenCreateEventAC.success(data.data[0]));
+      },
+      onStarted: () => {},
+    },
+  });
+};
+const postNewEvent = (eventData: TeacherInput) => {
+  const url = makeApiUrl("/events/");
+  console.log(eventData);
+  return apiAction({
+    request: {
+      url,
+      method: "POST",
+      data: {
+        eventData,
+      },
+    },
+    logic: {
+      onFailed: (error, dispatch) => {},
+      onSuccess: (data, dispatch) => {
+        console.log(data);
       },
       onStarted: () => {},
     },
