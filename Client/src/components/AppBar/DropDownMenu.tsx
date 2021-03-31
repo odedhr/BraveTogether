@@ -27,9 +27,6 @@ const StyledMenu = withStyles({
     {...props}
   />
 ));
-const ListItemTextStyled = styled(ListItemText)`
-  direction: rtl;
-`;
 const StyledMenuItem = withStyles((theme) => ({
   root: {
     "&:focus": {

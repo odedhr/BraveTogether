@@ -10,7 +10,7 @@ import { ReactComponent as Music } from "../../assets/icons/music.svg";
 import Map from "../Map/MapContainer";
 import Popup from "../Modal/Modal";
 const Title = styled.div`
-  font-size: 55px;
+  font-size: 50px;
   line-height: 1.13;
   letter-spacing: normal;
   text-align: center;
@@ -44,6 +44,7 @@ const CategoryWrapper = styled.div<{ isSelected: boolean }>`
 const Categories = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 3%;
 `;
 const Icons: any = {
   chess: <Chess />,
@@ -72,12 +73,7 @@ export default function Main(props: MainProps) {
   };
   return (
     <div>
-      <div>
-        <Title>השיעורים הכי משמעותיים</Title>
-        <Title>מגיבורים מעוררי השראה</Title>
-      </div>
-      <SubTitle>מערך שיעורים בהתנדבות, מועברים על ידי גיבורי שואה</SubTitle>
-      <Text>?מה בא לך ללמוד</Text>
+      {WelcomeText()}
 
       {CategoriesRenderer()}
       <Text>!דרך אגב, אפשר יותר מדבר אחד</Text>
@@ -87,6 +83,19 @@ export default function Main(props: MainProps) {
       </Popup>
     </div>
   );
+
+  function WelcomeText() {
+    return (
+      <>
+        <div>
+          <Title>השיעורים הכי משמעותיים</Title>
+          <Title>מגיבורים מעוררי השראה</Title>
+        </div>
+        <SubTitle>מערך שיעורים בהתנדבות, מועברים על ידי גיבורי שואה</SubTitle>
+        <Text>?מה בא לך ללמוד</Text>
+      </>
+    );
+  }
 
   function CategoriesRenderer() {
     return (
@@ -110,4 +119,34 @@ export default function Main(props: MainProps) {
       </Categories>
     );
   }
+}
+const InTheNextDay = styled.div`
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: rgba(10, 16, 13, 0.7);
+  font-size: 25px;
+  width: 50%;
+  margin-top: 1%;
+`;
+const QuestionText = styled.div`
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: rgba(10, 16, 13, 0.6);
+`;
+function AfterRegisterManagerText() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Title>בקשתך התקבלה</Title>
+      <InTheNextDay>
+        בימים הקרובים, אנו נעבור על בקשתך על מנת לאשר אותה, זאת על מנת לשמור על בטיחות הגיבוים
+        והתלמידים כאחד. תוך יום-יומיים נחזור אלייך. תודה על הסבלנות
+      </InTheNextDay>
+      <div style={{ marginTop: "3%" }}>
+        <QuestionText> שאלות? רעיונות? נשמע לשמוע מכם </QuestionText>
+        <QuestionText> doers@brave-together.com </QuestionText>
+      </div>
+    </div>
+  );
 }
