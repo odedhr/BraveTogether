@@ -1,42 +1,60 @@
-import React, { useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBarMaterial from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Popup from '../Modal/Modal';
+import React, { useState } from "react";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import AppBarMaterial from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Menu from "./DropDownMenu";
+import Button from "@material-ui/core/Button";
+
+import Popup from "../Modal/Modal";
+import Login from "../Login/Login";
+import styled from "styled-components";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+      backgroundColor: "white",
     },
     menuButton: {
       marginRight: theme.spacing(2),
     },
     title: {
       flexGrow: 1,
+      backgroundColor: "white",
     },
-  }),
+  })
 );
-
+const StyledAppBar = styled(AppBarMaterial)<any>`
+  background-color: #ffffff;
+  color: black;
+  box-shadow: none;
+`;
+const StyledLoginButton = styled(Button)``;
+const Link = styled.div`
+  margin-left: 30px;
+`;
 export default function AppBar() {
   const classes = useStyles();
   const [isModalOpen, setOpenModal] = useState(false);
 
   return (
     <div className={classes.root}>
-      <AppBarMaterial position="static">
+      <StyledAppBar position="static">
         <Toolbar>
-          <Button color="inherit" onClick={()=>setOpenModal(!isModalOpen)}>התחברות</Button>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
+          <StyledLoginButton color="inherit">
+            <Menu></Menu>
+          </StyledLoginButton>
+          <Link>?איך מתחילים ללמד</Link>
+          <Link>?מי אנחנו</Link>
         </Toolbar>
-      </AppBarMaterial>
-      <Popup isModalOpen={isModalOpen} closePopup={(isOpen:boolean)=>setOpenModal(isOpen)} ></Popup>
+      </StyledAppBar>
+      <Popup isModalOpen={isModalOpen} closePopup={(isOpen: boolean) => setOpenModal(isOpen)}>
+        <>
+          <div>?איך מתחילים ללמד</div>
+          <div>הצטרפו למיזם שלנו והוסיפו מורים גיבורי שואה</div>
+          <Login></Login>
+        </>
+      </Popup>
     </div>
   );
 }

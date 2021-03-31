@@ -7,7 +7,8 @@ import { ReactComponent as Chess } from "../../assets/icons/chess.svg";
 import { ReactComponent as Langugage } from "../../assets/icons/language.svg";
 import { ReactComponent as Study } from "../../assets/icons/study.svg";
 import { ReactComponent as Music } from "../../assets/icons/music.svg";
-
+import Map from "../Map/MapContainer";
+import Popup from "../Modal/Modal";
 const Title = styled.div`
   font-size: 55px;
   line-height: 1.13;
@@ -23,7 +24,7 @@ const SubTitle = styled.div`
   color: rgba(27, 27, 58, 0.5);
 `;
 const Text = styled.div`
-  margin-top: 2%;
+  margin-top: 1%;
 `;
 const CategoryWrapper = styled.div<{ isSelected: boolean }>`
   width: 7%;
@@ -31,9 +32,10 @@ const CategoryWrapper = styled.div<{ isSelected: boolean }>`
   flex-grow: 0;
   padding: 9px 23px 9px 23.5px;
   border-radius: 50px;
-  background-color: ${(props) => (props.isSelected ? "darkgrey" : "#e5e5e5")};
+  border: solid 1px #000000;
+  background-color: ${(props) => (props.isSelected ? "#048ba8" : "#ffffff")};
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin: 0px 0.5%;
   color: ${(props) => (props.isSelected ? "white" : "black")};
@@ -53,6 +55,7 @@ const Icons: any = {
 
 export default function Main(props: MainProps) {
   const { categories, selectCategory, selectedCategories } = props;
+  const [isModalOpen, setOpenModal] = React.useState(false);
   const onClickCategory = (category: Category, isSelected: string) => {
     if (isSelected) {
       const newCategories = selectedCategories!.filter((selectedCategory) => {
@@ -75,7 +78,18 @@ export default function Main(props: MainProps) {
       </div>
       <SubTitle>מערך שיעורים בהתנדבות, מועברים על ידי גיבורי שואה</SubTitle>
       <Text>?מה בא לך ללמוד</Text>
+
+      {CategoriesRenderer()}
       <Text>!דרך אגב, אפשר יותר מדבר אחד</Text>
+      <Map openModal={() => setOpenModal(true)} />
+      <Popup isModalOpen={isModalOpen} closePopup={(isOpen: boolean) => setOpenModal(isOpen)}>
+        <></>
+      </Popup>
+    </div>
+  );
+
+  function CategoriesRenderer() {
+    return (
       <Categories>
         {categories &&
           categories.map((category: Category) => {
@@ -84,6 +98,7 @@ export default function Main(props: MainProps) {
             ) as string;
             return (
               <CategoryWrapper
+                key={category.name}
                 isSelected={!!isSelected}
                 onClick={() => onClickCategory(category, isSelected)}
               >
@@ -93,6 +108,6 @@ export default function Main(props: MainProps) {
             );
           })}
       </Categories>
-    </div>
-  );
+    );
+  }
 }

@@ -2,33 +2,31 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('heroes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      first_name: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-        unique: true
+        type: Sequelize.STRING
       },
-      is_manager: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
+      last_name: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
-      has_criminal_record: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      },
-      has_committed_to_privacy: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
+      location: {
+        type: Sequelize.STRING
       },
       image: {
         type: Sequelize.STRING
-        // TODO: allowNull: false
+        // TODO allowNull: false
+      },
+      manager_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       created_at: {
         allowNull: false,
@@ -42,6 +40,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('heroes');
   }
 };

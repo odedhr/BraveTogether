@@ -11,4 +11,8 @@ export default {
     ],
     selectedCategory: undefined,
   },
+  events: {
+    events: [],
+    newEvent: undefined,
+  },
 } as Store;
