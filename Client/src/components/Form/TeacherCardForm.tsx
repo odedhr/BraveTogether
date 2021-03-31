@@ -4,14 +4,22 @@ import styled from "styled-components";
 import DropFile from "./DropFile";
 import { CategoriesRenderer, InTheNextDay, SubTitle, Title } from "../Main/Main";
 import { TeacherCardFormProps } from "./TeacherCardFormContainer";
-import { Category } from "../../store/storeTypes";
+import { Category, Event } from "../../store/storeTypes";
+import { Token } from "../../actions/types/userActionTypes";
 export type TeacherInput = {
   speciality: string;
   fullName: string;
-  about: string;
-  address: string;
+  description: string;
+  location: string;
 };
-
+export type Hero = {
+  fullName: string | undefined;
+  description: string | undefined;
+  location: string | undefined;
+  speciality: string | undefined;
+  manager_id: string | undefined;
+  id?: string;
+};
 const StyledForm = styled.form`
   display: "flex";
   flex-direction: "row-reverse";
@@ -49,13 +57,45 @@ const TextArea = styled.textarea`
   border: none;
 `;
 export default function TeacherCardForm(props: TeacherCardFormProps) {
-  const { categories, convertAddressToLocationThenCreateEvent, newEvent } = props;
+  const {
+    categories,
+    convertAddressToLocationThenCreateEvent,
+    newEvent,
+    postNewEvent,
+    user,
+    createHeroRequset,
+  } = props;
   const [selectedCategories, setSelectedCategories] = React.useState<string[]>([]);
   const { register, handleSubmit, errors } = useForm();
   const [files, setFiles] = React.useState<File[]>([]);
+  const [formData, setFormData] = React.useState<TeacherInput | null>(null);
   const onSubmit = (data: TeacherInput) => {
-    convertAddressToLocationThenCreateEvent(data.address, data);
+    const hero = {
+      ...data,
+
+      file: { path: "" },
+      token: user.token,
+      first_name: "sdfs",
+      last_name: "gfdgfds",
+      manager_id: 21,
+    };
+    createHeroRequset(hero as any);
+    convertAddressToLocationThenCreateEvent(data.location);
+    setFormData(data);
   };
+  React.useEffect(() => {
+    if (newEvent?.lat && newEvent?.long) {
+      const createEvent: Event & Token = {
+        ...newEvent,
+        ...formData,
+        tags: selectedCategories,
+        pic: files[0],
+        token: user.token ? user.token : "",
+        reward: 10,
+      };
+      postNewEvent(createEvent);
+    }
+  }, [newEvent]);
 
   const onClickCategory = (category: Category, isSelectedString: string) => {
     if (isSelectedString) {
@@ -106,9 +146,9 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
             name="hero_name"
             ref={register({ required: true, max: 15, min: 2 })}
           />
-          <Input type="text" placeholder="כתובת? רחוב ועיר יספיקו" name="address" ref={register} />
+          <Input type="text" placeholder="כתובת? רחוב ועיר יספיקו" name="location" ref={register} />
           <TextArea
-            name="about"
+            name="description"
             placeholder="ספרו לנו על הגיבור"
             ref={register({ required: true, max: 0, maxLength: 30 })}
           />

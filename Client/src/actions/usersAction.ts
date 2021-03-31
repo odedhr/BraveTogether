@@ -3,11 +3,12 @@ import { makeApiUrl } from "./utils";
 import apiAction from "./apiAction";
 import {
   convertAddressToLocationThenCreateEventAC,
+  createHeroRequsetAction,
   loginUserAction,
   registerUser,
   tokenRequestAction,
 } from "./types/userActionTypes";
-import { TeacherInput } from "../components/Form/TeacherCardForm";
+import { Hero, TeacherInput } from "../components/Form/TeacherCardForm";
 export type UserPost = {
   email: string;
   password: string;
@@ -34,6 +35,22 @@ export const registerUserRequset = (user: UserPost) => {
       onSuccess: (data, dispatch) => {
         dispatch(registerUser.success(data));
       },
+      onStarted: () => {},
+    },
+  });
+};
+export const createHeroRequset = (hero: Hero) => {
+  const url = makeApiUrl("heroes/");
+  console.log(hero);
+  return apiAction({
+    request: {
+      url,
+      method: "POST",
+      data: hero,
+    },
+    logic: {
+      onFailed: (error, dispatch) => console.log(error),
+      onSuccess: (data, dispatch) => console.log(data),
       onStarted: () => {},
     },
   });
@@ -69,55 +86,6 @@ export const loginRequest = (username: string) => {
       onSuccess: (data, dispatch) => {
         console.log(data);
         dispatch(loginUserAction.success(data));
-      },
-      onStarted: () => {},
-    },
-  });
-};
-export const convertAddressToLocationThenCreateEvent = (
-  address: string,
-  eventData: TeacherInput
-) => {
-  const url = "http://api.positionstack.com/v1/forward";
-  return apiAction({
-    request: {
-      url,
-      params: {
-        access_key: "93de448afd13312becfeb7b03e1a9711",
-        query: address,
-      },
-    },
-    logic: {
-      onFailed: (error, dispatch) =>
-        dispatch(convertAddressToLocationThenCreateEventAC.failure(error)),
-      onSuccess: (data, dispatch) => {
-        const eventDataWithLocation = {
-          ...eventData,
-          long: data.data[0].longitude,
-          lat: data.data[0].latitude,
-        };
-        postNewEvent(eventDataWithLocation);
-        dispatch(convertAddressToLocationThenCreateEventAC.success(data.data[0]));
-      },
-      onStarted: () => {},
-    },
-  });
-};
-const postNewEvent = (eventData: TeacherInput) => {
-  const url = makeApiUrl("/events/");
-  console.log(eventData);
-  return apiAction({
-    request: {
-      url,
-      method: "POST",
-      data: {
-        eventData,
-      },
-    },
-    logic: {
-      onFailed: (error, dispatch) => {},
-      onSuccess: (data, dispatch) => {
-        console.log(data);
       },
       onStarted: () => {},
     },

@@ -1,3 +1,5 @@
+import { Hero } from "../components/Form/TeacherCardForm";
+
 export type Category = {
   name: string;
   imgName?: string;
@@ -13,6 +15,9 @@ export type Event = {
   hero: string;
   address: string;
   manager_id: string;
+  pic: File;
+  tags: string[];
+  reward: number;
 };
 export type Events = {
   events: Event[];
@@ -26,11 +31,12 @@ export type User = {
   CriminalBackGroundCheck: boolean | undefined;
   userAgreement: boolean | undefined;
   id: string | undefined;
-  token:string|undefined;
-  is_manager:boolean
+  token: string | undefined;
+  is_manager: boolean;
 };
 export type Store = {
   entities: Entities;
   events: Events;
   user: User;
+  hero: Hero;
 };

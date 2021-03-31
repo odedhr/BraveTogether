@@ -34,11 +34,16 @@ export const loginUserAction = createAsyncAction(
   "LOGIN_USER_STARTED",
   "LOGIN_USER_SUCCESS",
   "LOGIN_USER_FAILED"
-)<any, Token, any>();
+)<any, any, any>();
 export const convertAddressToLocationThenCreateEventAC = createAsyncAction(
   "CONVERT_ADDRESS_STARTED",
   "CONVERT_ADDRESS_SUCCESS",
   "CONVERT_ADDRESS_FAILED"
+)<any, any, any>();
+export const createHeroRequsetAction = createAsyncAction(
+  "CREATE_HERO_STARTED",
+  "CREATE_HERO_SUCCESS",
+  "CREATE_HERO_FAILED"
 )<any, any, any>();
 export type UserActionTypes =
   | typeof registerUser
