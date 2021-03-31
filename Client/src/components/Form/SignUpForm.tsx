@@ -41,8 +41,11 @@ interface FormInput {
 
 export default function SignUpForm(props: SignUpFormProps) {
   const { registerUserRequset } = props;
-  const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data: FormInput) => registerUserRequset(data as any);
+  const { register, handleSubmit, errors } = useForm({ mode: "onSubmit" });
+  const onSubmit = (data: FormInput) => {
+    console.log(data);
+    registerUserRequset(data as any);
+  };
   return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -79,10 +82,10 @@ export default function SignUpForm(props: SignUpFormProps) {
         />
         <br />
         <InputBox
-          type="text"
+          type="password"
           id="password"
           placeholder="סיסמא"
-          name="סיסמא"
+          name="password"
           ref={register({ required: true, max: 12, min: 6 })}
         />
         <div>

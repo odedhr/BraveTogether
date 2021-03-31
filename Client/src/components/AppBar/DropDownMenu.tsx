@@ -4,7 +4,8 @@ import Menu, { MenuProps } from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { DropDownMenuProps } from "./DropDownMenuContainer";
 import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
-
+import Popup from "../Modal/Modal";
+import Login from "../Login/Login";
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
@@ -39,7 +40,7 @@ const StyledMenuItem = withStyles((theme) => ({
 export default function DropDownMenu(props: DropDownMenuProps) {
   const { isLoggedIn } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [isModalOpen, setOpenModal] = useState(false);
+  const [isModalOpen, setOpenModal] = React.useState(false);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (isLoggedIn) setAnchorEl(event.currentTarget);
     else {

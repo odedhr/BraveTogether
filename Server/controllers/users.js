@@ -1,15 +1,15 @@
-const { User } = require('../models');
+const { User } = require("../models");
 
 module.exports = {
   fetchAll: async (req, res) => {
     const content = {
       error: false,
-      message: 'Users successfully fetched'
+      message: "Users successfully fetched",
     };
 
     try {
-      const usersAPI = [] // TODO: fetch users from api
-      const users = await User.findAll({ include: ['heroes'] })
+      const usersAPI = []; // TODO: fetch users from api
+      const users = await User.findAll({ include: ["heroes"] });
       // TODO: mapper that will merge the two arrays by user_id
       content.users = users;
     } catch (error) {
@@ -17,19 +17,22 @@ module.exports = {
       content.message = error.message;
     }
 
-    res.send(content)
+    res.send(content);
   },
   fetchOne: async (req, res) => {
     const content = {
       error: false,
-      message: `User with id #${req.params.id} successfully fetched`
+      message: `User with id #${req.params.id} successfully fetched`,
     };
 
     try {
       const userAPI = null; // TODO: fetch user from api
-      const user = await User.findOne({ where: { user_id: req.params.id } }, {
-        include: ['heroes']
-      });
+      const user = await User.findOne(
+        { where: { user_id: req.params.id } },
+        {
+          include: ["heroes"],
+        }
+      );
       // TODO: mapper that will merge the two user data objects
       content.user = user;
     } catch (error) {
@@ -42,19 +45,20 @@ module.exports = {
   create: (req, res) => {
     User.create({
       ...req.body,
-      image: req.file.path
-    }).then(user => {
+      // image: req.file.path
+    })
+      .then((user) => {
         res.status(201).send({
           error: false,
-          message: 'User successfully added',
-          user
+          message: "User successfully added",
+          user,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         res.send({
           error: true,
-          message: err.message
+          message: err.message,
         });
       });
-  }
+  },
 };

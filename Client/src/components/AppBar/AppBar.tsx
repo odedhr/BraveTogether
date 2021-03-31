@@ -5,8 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Menu from "./DropDownMenuContainer";
 import Button from "@material-ui/core/Button";
 
-import Popup from "../Modal/Modal";
-import Login from "../Login/Login";
+
 import styled from "styled-components";
 
 const useStyles = makeStyles((theme: Theme) =>
