@@ -1,0 +1,43 @@
+'use strict';
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('events', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      lat: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      long: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      address: Sequelize.STRING,
+      hero_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      manager_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('events');
+  }
+};
