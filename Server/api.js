@@ -9,7 +9,7 @@ const cors = require('cors');
 const cron = require('node-cron');
 const managerApprover = require('./lib/jobs/manager_approver');
 
-// cron.schedule('*/10 * * * * *', managerApprover.work);
+cron.schedule('*/30 * * * * *', managerApprover.work);
 
 api.use(cors());
 api.use(express.json());

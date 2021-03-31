@@ -31,7 +31,7 @@ module.exports = {
           include: ["hero", "manager"],
         }
       );
-      // TODO: mapper that will merge the two event data objects
+
       content.event = event;
     } catch (error) {
       content.error = true;
@@ -53,7 +53,7 @@ module.exports = {
         headers: {
           'Content-Type': 'application/json'
         },
-        auth: auth = {
+        auth: {
           username: req.body.token,
           password: ''
         }
@@ -64,11 +64,15 @@ module.exports = {
         event_id: apiEvent.data.id
       });
 
+      const mergedEvent = {
+        ...apiEvent.data,
+        ...event.dataValues
+      }
+
       res.status(201).send({
         error: false,
         message: 'Event successfully added',
-        api_event: apiEvent ? apiEvent.data : {},
-        event: event
+        event: mergedEvent
       });
     } catch (err) {
       console.log(err);

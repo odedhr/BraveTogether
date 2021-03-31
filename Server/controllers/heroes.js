@@ -8,7 +8,6 @@ module.exports = {
     };
 
     try {
-      console.log(req.query.manager_id);
       if (req.query.manager_id) {
         const manager = await User.findByPk(req.query.manager_id, { 
           include: ['heroes']

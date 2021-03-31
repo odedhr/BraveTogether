@@ -9,15 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      first_name: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      last_name: {
+      full_name: {
         allowNull: false,
         type: Sequelize.STRING
       },
       description: {
+        type: Sequelize.STRING
+      },
+      speciality: {
         type: Sequelize.STRING
       },
       location: {

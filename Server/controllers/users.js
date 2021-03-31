@@ -90,7 +90,8 @@ module.exports = {
           },
         }
       );
-
+      
+      req.body.is_manager = false;
       var user = await User.create({
         ...req.body,
         user_id: apiUser.data.id,
@@ -105,6 +106,7 @@ module.exports = {
           cellphone: req.body.cellphone,
           has_criminal_record: req.body.has_criminal_record,
           has_committed_to_privacy: req.body.has_committed_to_privacy,
+          is_manager: false,
           is_approved: false
         });
       }

@@ -11,6 +11,9 @@ module.exports = {
     });
     await doc.loadInfo()
     const sheet = doc.sheetsByIndex[0];
-    await sheet.addRow(data)
+    await sheet.addRow({
+      ...data,
+      application_submitted_at: new Date().toLocaleString('he-IL', {timeZone:'Asia/Jerusalem'})
+    });
   }
 };
