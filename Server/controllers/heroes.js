@@ -42,9 +42,10 @@ module.exports = {
     res.send(content);
   },
   create: (req, res) => {
+    console.log(req.body.file);
     Hero.create({
       ...req.body,
-      // image: req.file.path
+      image: req.file.path,
     })
       .then((user) => {
         res.send({

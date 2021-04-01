@@ -1,7 +1,7 @@
 import { Event } from "../store/storeTypes";
 import apiAction from "./apiAction";
 import * as types from "./types/actionStringsTypes";
-import { CreateNewEventAction } from "./types/eventsActionTypes";
+import { CreateNewEventAction, getAllEventsAction } from "./types/eventsActionTypes";
 import {
   convertAddressToLocationThenCreateEventAC,
   createHeroRequsetAction,
@@ -46,6 +46,23 @@ export const postNewEvent = (eventData: Event) => {
     logic: {
       onFailed: (error, dispatch) => {},
       onSuccess: (data, dispatch) => {},
+      onStarted: () => {},
+    },
+  });
+};
+export const getAllEvents = () => {
+  const url = makeApiUrl("events/");
+
+  return apiAction({
+    request: {
+      url,
+    },
+    logic: {
+      onFailed: (error, dispatch) => {},
+      onSuccess: (data, dispatch) => {
+        console.log(data);
+        dispatch(getAllEventsAction.success(data.events));
+      },
       onStarted: () => {},
     },
   });

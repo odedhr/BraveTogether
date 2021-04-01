@@ -72,15 +72,15 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
   const [files, setFiles] = React.useState<File[]>([]);
   const [formData, setFormData] = React.useState<TeacherInput | null>(null);
   const onSubmit = (data: TeacherInput) => {
-    const hero = {
-      ...data,
+    const hero = new FormData();
 
-      file: { path: "" },
-      token: user.token,
-      first_name: "sdfs",
-      last_name: "gfdgfds",
-      manager_id: user.id,
-    };
+    hero.append("image", files[0]);
+    hero.append("token", user.token!);
+    hero.append("full_name", data.fullName);
+    hero.append("manager_id", user.id!);
+    hero.append("speciality", data.speciality);
+    hero.append("location", data.location);
+
     createHeroRequset(hero as any);
     convertAddressToLocationThenCreateEvent(data.location);
     setFormData(data);

@@ -51,7 +51,11 @@ export default function apiAction(conf: ApiActionConfig) {
     request.url += quieryString;
     request.data = typeof request.data === "function" ? request.data(state) : request.data;
     request.method = request.method || "GET";
-    const contentTypeHeader = { "Content-Type": "application/json" };
+
+    const contentTypeHeader = {
+      "Content-Type": request.data instanceof FormData ? "multipart/form-data" : "application/json",
+    };
+
     request.headers = { ...contentTypeHeader, ...request.headers };
 
     if (interceptor && interceptor(state)) return;

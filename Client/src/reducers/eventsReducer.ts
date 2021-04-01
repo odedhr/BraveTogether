@@ -1,4 +1,4 @@
-import { EventsActionTypes } from "../actions/types/eventsActionTypes";
+import { EventsActionTypes, getAllEventsAction } from "../actions/types/eventsActionTypes";
 import initialState from "../store/initState";
 import { Events, Store } from "../store/storeTypes";
 import * as actionStringsTypes from "../actions/types/actionStringsTypes";
@@ -20,13 +20,15 @@ import { convertAddressToLocationThenCreateEventAC } from "../actions/types/user
 //     }
 //   }
 // }
-const reducer = createReducer<Events, any>(initialState.events).handleAction(
-  convertAddressToLocationThenCreateEventAC.success,
-  (state: Events, action: any) => {
+const reducer = createReducer<Events, any>(initialState.events)
+  .handleAction(convertAddressToLocationThenCreateEventAC.success, (state: Events, action: any) => {
     return {
       ...state,
       newEvent: { ...state.newEvent, long: action.payload.longitude, lat: action.payload.latitude },
     };
-  }
-);
+  })
+  .handleAction(getAllEventsAction.success, (state: Events, action: any) => {
+    console.log("action", action);
+    return { ...state, events: [...action.payload] };
+  });
 export default reducer;

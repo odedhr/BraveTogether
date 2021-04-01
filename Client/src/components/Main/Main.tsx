@@ -57,11 +57,15 @@ const Icons: any = {
 export default function Main(props: MainProps) {
   const {
     categories,
-    selectCategory,
     selectedCategories,
     managerSignedUp,
     managerLoggedIn,
+    selectCategory,
+    getAllEvents,
   } = props;
+  React.useEffect(() => {
+    getAllEvents();
+  });
   const [isModalOpen, setOpenModal] = React.useState(false);
   const [isMangerSignedUpState, setIsMangerSignedUpState] = React.useState(false);
   const onClickCategory = (category: Category, isSelected: string) => {
