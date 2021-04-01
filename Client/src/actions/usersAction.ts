@@ -16,7 +16,6 @@ export type UserPost = {
   first_name: string;
   last_name: string;
   cellphone: string;
-  is_manager: boolean;
   has_criminal_record: boolean;
   has_committed_to_privacy: boolean;
   has_applied_for_manager: boolean;

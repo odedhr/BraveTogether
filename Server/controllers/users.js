@@ -78,7 +78,6 @@ module.exports = {
       content.user = {
         ...user,
         ...response.data,
-        is_manager: true,
       };
     } catch (error) {
       content.error = true;
@@ -89,7 +88,7 @@ module.exports = {
   },
   create: async (req, res) => {
     var mailText = "You have successfully registered your account!";
-
+    console.log(req.body);
     try {
       var apiUser = await axios.post(
         "http://127.0.0.1:5000/user",
@@ -114,7 +113,7 @@ module.exports = {
         image: req.file ? req.file.path : null,
       });
 
-      if (req.body.has_applied_for_manager == "true") {
+      if (req.body.has_applied_for_manager == true) {
         Spreadsheet.addRow({
           first_name: req.body.first_name,
           last_name: req.body.last_name,

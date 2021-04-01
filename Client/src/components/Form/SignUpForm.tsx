@@ -9,7 +9,7 @@ export const InputBox = styled.input<any>`
   margin: 9px;
   padding: 10px 30px;
   width: 35%;
-  min-width:fit-content;
+  min-width: fit-content;
   background-color: #f0f0f0;
   text-align: right;
 `;
@@ -25,9 +25,9 @@ export const SubmitButton = styled.input`
   margin: 5px;
   background-color: #048ba8;
   width: 30%;
-  min-width:fit-content;
-  color:white;
-  border:none;
+  min-width: fit-content;
+  color: white;
+  border: none;
   border-radius: 12px;
   font-size: 16px;
 `;
@@ -50,12 +50,12 @@ export default function SignUpForm(props: SignUpFormProps) {
   const { registerUserRequset } = props;
   const { register, handleSubmit, errors } = useForm({ mode: "onSubmit" });
   const onSubmit = (data: FormInput) => {
-    const user: UserPost = { ...data, is_manager: true, has_applied_for_manager: true };
+    const user: UserPost = { ...data, has_applied_for_manager: true };
     registerUserRequset(user);
   };
   return (
     <div>
-      <Form style={{margin:"20px 70px"}} onSubmit={handleSubmit(onSubmit)}>
+      <Form style={{ margin: "20px 70px" }} onSubmit={handleSubmit(onSubmit)}>
         <InputBox
           type="text"
           id="first_name"
@@ -95,14 +95,16 @@ export default function SignUpForm(props: SignUpFormProps) {
           name="password"
           ref={register({ required: true, max: 12, min: 6 })}
         />
-        <div style= {{ marginTop:"25px" }}>
+        <div style={{ marginTop: "25px" }}>
           <InputCheckBox
             type="checkbox"
             id="has_criminal_record"
             name="has_criminal_record"
             ref={register({ required: true })}
           />
-          <InputCheckBoxLabel style={{padding:"10px"}} htmlFor="has_criminal_record">אין לי עבר פלילי</InputCheckBoxLabel>
+          <InputCheckBoxLabel style={{ padding: "10px" }} htmlFor="has_criminal_record">
+            אין לי עבר פלילי
+          </InputCheckBoxLabel>
         </div>
         <div>
           <InputCheckBox
@@ -111,7 +113,7 @@ export default function SignUpForm(props: SignUpFormProps) {
             name="has_committed_to_privacy"
             ref={register({ required: "חובה להסכים לתנאי השימוש" })}
           />
-          <InputCheckBoxLabel style={{padding:"10px"}} htmlFor="has_committed_to_privacy">
+          <InputCheckBoxLabel style={{ padding: "10px" }} htmlFor="has_committed_to_privacy">
             אני מסכים לתנאי השימוש
           </InputCheckBoxLabel>
         </div>
