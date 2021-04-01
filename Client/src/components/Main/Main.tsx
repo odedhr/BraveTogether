@@ -7,6 +7,11 @@ import { ReactComponent as Chess } from "../../assets/icons/chess.svg";
 import { ReactComponent as Langugage } from "../../assets/icons/language.svg";
 import { ReactComponent as Study } from "../../assets/icons/study.svg";
 import { ReactComponent as Music } from "../../assets/icons/music.svg";
+import gif1 from "../../assets/icons/giph1.gif";
+import gif2 from "../../assets/icons/giph2.gif";
+import gif3 from "../../assets/icons/giph3.gif";
+import gif4 from "../../assets/icons/giph4.gif";
+import gif5 from "../../assets/icons/giph5.gif";
 import Map from "../Map/MapContainer";
 import Popup from "../Modal/Modal";
 import AboutUs from "./AboutUs";
@@ -16,6 +21,12 @@ export const Title = styled.div`
   letter-spacing: normal;
   text-align: center;
   color: #0a100d;
+  width: fit-content;
+`;
+export const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 export const SubTitle = styled.div`
   font-size: 15px;
@@ -106,12 +117,24 @@ export default function Main(props: MainProps) {
   function WelcomeText() {
     return (
       <>
-        <div>
-          <Title>השיעורים הכי משמעותיים</Title>
-          <Title>מגיבורים מעוררי השראה</Title>
+        <div style={{ display: "flex" }}>
+          <div style={{ flexGrow: 1 }}>
+            <img style={{ height: "200px", width: "200px" }} src={gif1} />
+            <img style={{ height: "200px", width: "200px" }} src={gif2} />
+          </div>
+          <div style={{ flexGrow: 1 }}>
+            <TitleWrapper>
+              <Title>השיעורים הכי משמעותיים</Title>
+              <Title>מגיבורים מעוררי השראה</Title>
+            </TitleWrapper>
+            <SubTitle>מערך שיעורים בהתנדבות, מועברים על ידי גיבורי שואה</SubTitle>
+            <Text>?מה בא לך ללמוד</Text>
+          </div>
+          <div style={{ flexGrow: 1 }}>
+            <img style={{ height: "200px", width: "200px" }} src={gif4} />
+            <img style={{ height: "200px", width: "200px" }} src={gif5} />
+          </div>
         </div>
-        <SubTitle>מערך שיעורים בהתנדבות, מועברים על ידי גיבורי שואה</SubTitle>
-        <Text>?מה בא לך ללמוד</Text>
       </>
     );
   }

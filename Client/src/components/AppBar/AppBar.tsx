@@ -4,7 +4,7 @@ import AppBarMaterial from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Menu from "./DropDownMenuContainer";
 import Button from "@material-ui/core/Button";
-
+import { ReactComponent as Logo } from "../../assets/icons/logo_hero_u.svg";
 import styled from "styled-components";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -44,6 +44,7 @@ export default function AppBar() {
           </StyledLoginButton>
           <Link>?איך מתחילים ללמד</Link>
           <Link>?מי אנחנו</Link>
+          <Logo style={{ marginLeft: "auto", width: "80px", height: "50px" }} />
         </Toolbar>
       </StyledAppBar>
     </div>

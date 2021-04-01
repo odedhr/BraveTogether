@@ -59,6 +59,7 @@ export default function SimplePopover(props: any) {
           vertical: "top",
           horizontal: "center",
         }}
+        style={{ borderRadius: "19px" }}
       >
         <MapCard hero={props.hero} interest={props.interest} />
       </Popover>
