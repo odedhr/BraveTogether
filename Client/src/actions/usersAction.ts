@@ -22,7 +22,6 @@ export type UserPost = {
 };
 export const registerUserRequset = (user: UserPost) => {
   const url = makeApiUrl("users/");
-  console.log(user);
 
   return apiAction({
     request: {
@@ -33,6 +32,7 @@ export const registerUserRequset = (user: UserPost) => {
     logic: {
       onFailed: (error, dispatch) => console.log(error),
       onSuccess: (data, dispatch) => {
+        console.log(data);
         dispatch(registerUser.success(data));
       },
       onStarted: () => {},

@@ -7,6 +7,7 @@ import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
 import Popup from "../Modal/Modal";
 import Login from "../Login/Login";
 import TeacherCardForm from "../Form/TeacherCardFormContainer";
+import styled from "styled-components";
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
@@ -37,7 +38,9 @@ const StyledMenuItem = withStyles((theme) => ({
     direction: "rtl",
   },
 }))(MenuItem);
-
+const OptionText = styled.div`
+  margin-right: 12px;
+`;
 export default function DropDownMenu(props: DropDownMenuProps) {
   const { managerLoggedIn, managerSignedUp } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -72,11 +75,11 @@ export default function DropDownMenu(props: DropDownMenuProps) {
         onClose={handleClose}
       >
         <StyledMenuItem>
-          <div>הפרופיל שלך</div>
+          <OptionText>הפרופיל שלך</OptionText>
         </StyledMenuItem>
         <hr></hr>
         <StyledMenuItem>
-          <div>מורים שפנית אליהם</div>
+          <OptionText>מורים שפנית אליהם</OptionText>
         </StyledMenuItem>
         <StyledMenuItem
           onClick={() => {
@@ -84,17 +87,17 @@ export default function DropDownMenu(props: DropDownMenuProps) {
             handleClose();
           }}
         >
-          <div>הוספת מורה</div>
+          <OptionText>הוספת מורה</OptionText>
         </StyledMenuItem>
         <StyledMenuItem>
-          <div>מורים שהוספת</div>
+          <OptionText>מורים שהוספת</OptionText>
         </StyledMenuItem>
         <hr></hr>
         <StyledMenuItem>
-          <div>יש שאלה? צור קשר</div>
+          <OptionText>יש שאלה? צור קשר</OptionText>
         </StyledMenuItem>
         <StyledMenuItem>
-          <div>התנתק</div>
+          <OptionText>התנתק</OptionText>
         </StyledMenuItem>
       </StyledMenu>
       <Popup

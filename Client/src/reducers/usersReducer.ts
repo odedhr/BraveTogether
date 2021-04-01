@@ -24,11 +24,11 @@ const reducer = createReducer<User, any>(initialState.user)
     if (!payload.error) {
       const user: User = {
         CriminalBackGroundCheck: payload.user.has_criminal_record,
-        email: payload.api_user.email,
-        firstName: payload.api_user.first_name,
-        lastName: payload.api_user.last_name,
-        id: payload.api_user.id,
-        phone: payload.api_user.cellphone,
+        email: payload.user.email,
+        firstName: payload.user.first_name,
+        lastName: payload.user.last_name,
+        id: payload.user.id,
+        phone: payload.user.cellphone,
         userAgreement: payload.user.has_committed_to_privacy,
         token: "",
         is_manager: payload.user.is_manager,
@@ -41,7 +41,7 @@ const reducer = createReducer<User, any>(initialState.user)
     const { payload } = action;
     return { ...state, token: payload.token };
   })
-  .handleAction(loginUserAction.success, (state: Store, action: { payload: Token }) => {
+  .handleAction(loginUserAction.success, (state: Store, action: any) => {
     const { payload } = action;
     return { ...state, ...payload };
   });

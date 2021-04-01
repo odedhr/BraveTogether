@@ -2,14 +2,12 @@ import { createAsyncAction } from "typesafe-actions";
 export type RegisterResponseData = {
   error: boolean;
   message: string;
-  api_user: {
+  user: {
     id: string;
     email: string;
     cellphone: string;
     first_name: string;
     last_name: string;
-  };
-  user: {
     has_committed_to_privacy: boolean;
     has_criminal_record: boolean;
     is_manager: boolean;

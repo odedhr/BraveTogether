@@ -4,7 +4,7 @@ import DropDownMenu from "./DropDownMenu";
 import { Store } from "../../store/storeTypes";
 import { registerUserRequset } from "../../actions/usersAction";
 const mapStateToProps = (state: Store) => ({
-  managerSignedUp: state.user.is_manager && state.user.token == "",
+  managerSignedUp: !state.user.is_manager && state.user.token == "",
   managerLoggedIn: state.user.is_manager && state.user.token,
 });
 const mapDispatchToProps = (dispatch: Dispatch) =>

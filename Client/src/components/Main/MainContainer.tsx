@@ -9,7 +9,7 @@ const mapStateToProps = (state: Store) => {
   return {
     categories: state.entities.categories,
     selectedCategories: state.entities.selectedCategory,
-    managerSignedUp: state.user.is_manager && state.user.token == "",
+    managerSignedUp: !state.user.is_manager && state.user.token == "",
     managerLoggedIn: state.user.is_manager && state.user.token,
   };
 };
