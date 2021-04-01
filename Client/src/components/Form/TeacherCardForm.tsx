@@ -21,6 +21,7 @@ export type Hero = {
   speciality: string | undefined;
   manager_id: string | undefined;
   id?: string;
+  hero_id?: string;
 };
 const StyledForm = styled.form`
   display: "flex";
@@ -81,6 +82,7 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
         manager_id: user.id!,
         speciality: data.speciality,
         location: data.location,
+        description: data.description,
       };
       createHeroRequset(hero as any);
       translate(data.location).then((res: any) => {

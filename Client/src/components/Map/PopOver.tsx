@@ -58,7 +58,7 @@ export default function SimplePopover(props: any) {
           horizontal: "center",
         }}
       >
-        <MapCard hero={props.hero} />
+        <MapCard hero={props.hero} interest={props.interest} />
       </Popover>
     </div>
   );

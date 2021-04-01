@@ -10,6 +10,7 @@ const mapStateToProps = (state: Store) => {
   return {
     events: state.events.events,
     selectedCategories: state.entities.selectedCategory,
+    heroes: state.events.heroes,
   };
 };
 const mapDispatchToProps = (dispatch: Dispatch) =>

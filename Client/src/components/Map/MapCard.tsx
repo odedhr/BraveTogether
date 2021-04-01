@@ -1,9 +1,22 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Hero } from "../Form/TeacherCardForm";
+import { ReactComponent as Chef } from "../../assets/icons/chef.svg";
+import { ReactComponent as Chess } from "../../assets/icons/chess.svg";
+import { ReactComponent as Langugage } from "../../assets/icons/language.svg";
+import { ReactComponent as Study } from "../../assets/icons/study.svg";
+import { ReactComponent as Music } from "../../assets/icons/music.svg";
 export interface IMapCardProps {
   hero: Hero;
+  interest: string;
 }
+const Icons: any = {
+  chess: <Chess />,
+  chef: <Chef />,
+  study: <Study />,
+  music: <Music />,
+  language: <Langugage />,
+};
 
 const HeroInfo = styled.div`
   width: 60%;
@@ -46,17 +59,23 @@ const SetClass = styled.div`
   font-weight: bold;
   font-size: 1.7em;
 `;
-const HeroImg = styled.div``;
 
 export default function MapCard(props: IMapCardProps) {
-  const { hero } = props;
+  const { hero, interest } = props;
   return (
     <Card style={{}}>
       <div style={{ display: "flex" }}>
-        <HeroImg>img div</HeroImg>
+        {/* <HeroImg>img div</HeroImg> */}
         <HeroInfo dir="rtl">
-          <Icon></Icon>
-          <div style={{ fontWeight: "bold", marginBottom: "15px", fontSize: "1.5em" }}>
+          {Icons[interest]}
+          <div
+            style={{
+              fontWeight: "bold",
+              marginBottom: "15px",
+              fontSize: "1.5em",
+              marginTop: "15px",
+            }}
+          >
             {hero.speciality}
           </div>
           <div style={{ marginBottom: "15px" }}>

@@ -18,6 +18,7 @@ export type Event = {
   pic: File;
   tags: string;
   reward: number;
+  hero_id?: string;
 };
 export type Events = {
   events: Event[];

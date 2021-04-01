@@ -16,7 +16,7 @@ const MapWrapper = styled.div`
   align-items: center;
 `;
 export default function Map(props: MapProps) {
-  const { events, selectedCategories } = props;
+  const { events, selectedCategories, heroes } = props;
   const AnyReactComponent = (data: any) => (
     <Popover interest={data.interest} hero={data.hero}></Popover>
   );
@@ -57,17 +57,28 @@ export default function Map(props: MapProps) {
         >
           {events
             .filter((event) => {
-              if (!selectedCategories) return event;
+              let found = false;
+              heroes.forEach((hero) => {
+                if (hero.id === event.hero_id) found = true;
+              });
+              if (found) return event;
+            })
+            .filter((event) => {
+              if (
+                !selectedCategories ||
+                (Array.isArray(selectedCategories) && selectedCategories.length == 0)
+              )
+                return event;
               else if (selectedCategories.includes(event.tags)) {
                 return event;
               }
             })
-            .map((marker) => {
+            .map((marker: any) => {
               return (
                 <AnyReactComponent
                   lat={marker.lat}
                   lng={marker.long}
-                  hero={marker.hero}
+                  hero={heroes.find((hero) => hero.id === marker.hero_id)!}
                   interest={marker.tags}
                 />
               );
