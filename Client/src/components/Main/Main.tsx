@@ -124,11 +124,11 @@ export const CategoriesRenderer = (
       {categories &&
         categories.map((category: Category) => {
           const foundString = selectedCategories?.find(
-            (selectedCategory) => category.name === selectedCategory
+            (selectedCategory) => category.imgName === selectedCategory
           ) as string;
           return (
             <CategoryWrapper
-              key={category.name}
+              key={category.imgName}
               isSelected={!!foundString}
               onClick={() => onClickCategory(category, foundString)}
             >

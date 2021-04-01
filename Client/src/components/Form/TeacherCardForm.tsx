@@ -86,7 +86,7 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
     setFormData(data);
   };
   React.useEffect(() => {
-    if (newEvent?.lat && newEvent?.long && hero.id && selectedCategories) {
+    if (newEvent?.lat && newEvent?.long && hero.id) {
       const createEvent: any = {
         lat: newEvent.lat,
         long: newEvent?.long,
@@ -95,7 +95,7 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
         manager_id: user.id!,
         title: shortId(),
         description: formData?.description!,
-        tags: selectedCategories,
+        tags: ["chess"],
         // pic: files[0],
         token: user.token!,
         reward: 10,
