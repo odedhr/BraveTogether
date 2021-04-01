@@ -127,10 +127,13 @@ module.exports = {
       res.status(201).send({
         error: false,
         message: "User successfully added",
-        api_user: apiUser ? apiUser.data : {},
-        user: user,
+        user: {
+          ...apiUser.data,
+          ...user.dataValues
+        },
       });
     } catch (err) {
+      console.log(err);
       res.send({
         error: true,
         message: err.response.data.message,
