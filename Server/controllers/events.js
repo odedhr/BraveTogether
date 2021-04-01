@@ -25,14 +25,21 @@ module.exports = {
     };
 
     try {
-      const event = await Event.findOne(
-        { where: { event_id: req.params.id } },
+      const event = await Event.findOne({ where: { event_id: req.params.id }, raw: true },
         {
           include: ["hero", "manager"],
         }
       );
-
-      content.event = event;
+      let eventApi = await axios.get(`http://localhost:5000/events/${event.event_id}`, {
+        auth: {
+          username: req.body.token,
+          password: "",
+        },
+      });
+      content.event = {
+        ...event,
+        ...eventApi.data
+      };
     } catch (error) {
       content.error = true;
       content.message = error.message;
