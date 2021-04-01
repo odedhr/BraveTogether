@@ -17,7 +17,7 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <div 
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -32,6 +32,7 @@ function TabPanel(props: TabPanelProps) {
     </div>
   );
 }
+
 const SignUpLabel = (
   <div>
     <div>?חדשים פה</div>
@@ -53,9 +54,9 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div >
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+        <Tabs  value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab icon={SignInLabel} />
           <Tab icon={SignUpLabel} />
         </Tabs>

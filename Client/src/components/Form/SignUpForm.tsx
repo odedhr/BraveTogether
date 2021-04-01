@@ -102,9 +102,9 @@ export default function SignUpForm(props: SignUpFormProps) {
             name="has_criminal_record"
             ref={register({ required: true })}
           />
-          <InputCheckBoxLabel style={{padding:"10px"}} htmlFor="has_criminal_record">אני ללא עבר פלילי</InputCheckBoxLabel>
+          <InputCheckBoxLabel style={{padding:"10px"}} htmlFor="has_criminal_record">אין לי עבר פלילי</InputCheckBoxLabel>
         </div>
-        <div style= {{ }}>
+        <div>
           <InputCheckBox
             type="checkbox"
             id="has_committed_to_privacy"
