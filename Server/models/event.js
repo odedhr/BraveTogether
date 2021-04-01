@@ -21,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
+    topic: {
+      type: DataTypes.STRING
+    },
     lat: {
       type: DataTypes.STRING,
       allowNull: false
