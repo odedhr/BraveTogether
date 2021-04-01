@@ -9,6 +9,7 @@ type OwnProps = {
 const mapStateToProps = (state: Store) => {
   return {
     events: state.events.events,
+    selectedCategory: state.entities.selectedCategory,
   };
 };
 const mapDispatchToProps = (dispatch: Dispatch) =>

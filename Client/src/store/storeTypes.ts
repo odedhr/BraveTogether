@@ -2,7 +2,7 @@ import { Hero } from "../components/Form/TeacherCardForm";
 
 export type Category = {
   name: string;
-  imgName?: string;
+  imgName: string;
 };
 export type Entities = {
   categories: Category[];

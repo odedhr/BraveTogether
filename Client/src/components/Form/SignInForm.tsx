@@ -8,7 +8,7 @@ const InputBox = styled.input<any>`
   border-radius: 7px;
   margin: 9px;
   padding: 9px 30px;
-  width: 30%;
+  width: 85%;
   background-color: #f0f0f0;
   text-align: right;
 `;
@@ -24,9 +24,9 @@ const SubmitButton = styled.input`
   margin: 15px 9px;
   background-color: #048ba8;
   width: 15%;
-  min-width:fit-content;
-  color:white;
-  border:none;
+  min-width: fit-content;
+  color: white;
+  border: none;
   border-radius: 12px;
   font-size: 17px;
 `;
@@ -54,7 +54,7 @@ export default function SignInForm(props: SignInFormProps) {
   }, [token]);
   return (
     <div>
-      <FormFrame style={{margin:"20px 70px"}} onSubmit={handleSubmit(onSubmit)}>
+      <FormFrame style={{ margin: "20px 70px" }} onSubmit={handleSubmit(onSubmit)}>
         <InputBox
           type="text"
           placeholder="אימייל"

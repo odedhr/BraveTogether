@@ -95,12 +95,14 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
         manager_id: user.id!,
         title: shortId(),
         description: formData?.description!,
-        tags: selectedCategories,
+        tags: ["chess"],
         // pic: files[0],
         token: user.token!,
         reward: 10,
       };
       postNewEvent(createEvent);
+    } else {
+      alert("חייבים לבחור קטגוריה");
     }
   }, [newEvent, hero]);
 
@@ -113,8 +115,8 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
     } else {
       const categories =
         selectedCategories && selectedCategories.length > 0
-          ? [...selectedCategories, category.name]
-          : [category.name];
+          ? [...selectedCategories, category.imgName]
+          : [category.imgName];
       setSelectedCategories(categories);
     }
   };
@@ -150,7 +152,7 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
           <Input
             type="text"
             placeholder="מה שם המורה?"
-            name="hero_name"
+            name="fullName"
             ref={register({ required: true, max: 15, min: 2 })}
           />
           <Input type="text" placeholder="כתובת? רחוב ועיר יספיקו" name="location" ref={register} />
