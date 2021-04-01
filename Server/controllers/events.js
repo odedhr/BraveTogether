@@ -9,14 +9,29 @@ module.exports = {
     };
 
     try {
+      var items = [];
       const events = await Event.findAll({ include: ["hero", "manager"] });
-      content.events = events;
+
+      await Promise.all(events.map(async (eventItem) => {
+        let eventApi = await axios.get(`http://localhost:5000/events/${eventItem.dataValues.event_id}`, {
+          auth: {
+            username: req.body.token,
+            password: "",
+          },
+        });
+        items.push({
+          ...eventItem.dataValues,
+          ...eventApi.data
+        })
+      }));
+
+      content.events = items;
+
+      res.send(content);
     } catch (error) {
       content.error = true;
       content.message = error.message;
     }
-
-    res.send(content);
   },
   fetchOne: async (req, res) => {
     const content = {
