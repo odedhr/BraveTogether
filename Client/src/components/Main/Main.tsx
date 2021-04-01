@@ -9,6 +9,7 @@ import { ReactComponent as Study } from "../../assets/icons/study.svg";
 import { ReactComponent as Music } from "../../assets/icons/music.svg";
 import Map from "../Map/MapContainer";
 import Popup from "../Modal/Modal";
+import AboutUs from "./AboutUs";
 export const Title = styled.div`
   font-size: 50px;
   line-height: 1.13;
@@ -77,8 +78,8 @@ export default function Main(props: MainProps) {
     } else {
       const categories =
         selectedCategories && selectedCategories.length > 0
-          ? [...selectedCategories, category.name]
-          : [category.name];
+          ? [...selectedCategories, category.imgName]
+          : [category.imgName];
       selectCategory(categories);
     }
   };
@@ -93,6 +94,7 @@ export default function Main(props: MainProps) {
       {CategoriesRenderer(categories, selectedCategories, onClickCategory)}
       <Text>!דרך אגב, אפשר יותר מדבר אחד</Text>
       <Map openModal={() => setOpenModal(true)} />
+      <AboutUs />
       <Popup isModalOpen={isModalOpen} closePopup={(isOpen: boolean) => setOpenModal(isOpen)}>
         <></>
       </Popup>

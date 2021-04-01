@@ -1,7 +1,7 @@
-const { User } = require('../models');
-const axios = require('axios');
-const Spreadsheet = require('../lib/spreadsheets');
-const sendMail = require('../lib/mailer')
+const { User } = require("../models");
+const axios = require("axios");
+const Spreadsheet = require("../lib/spreadsheets");
+const sendMail = require("../lib/mailer");
 
 module.exports = {
   fetchAll: async (req, res) => {
@@ -78,6 +78,7 @@ module.exports = {
       content.user = {
         ...user,
         ...response.data,
+        is_manager: true,
       };
     } catch (error) {
       content.error = true;
@@ -87,7 +88,7 @@ module.exports = {
     res.send(content);
   },
   create: async (req, res) => {
-    var mailText = 'You have successfully registered your account!';
+    var mailText = "You have successfully registered your account!";
 
     try {
       var apiUser = await axios.post(
@@ -122,25 +123,26 @@ module.exports = {
           has_criminal_record: req.body.has_criminal_record,
           has_committed_to_privacy: req.body.has_committed_to_privacy,
           is_manager: false,
-          is_approved: false
+          is_approved: false,
         });
 
-        mailText = 'You applied for being a manager. We will let you know once your application is approved.'
+        mailText =
+          "You applied for being a manager. We will let you know once your application is approved.";
       }
 
       sendMail({
         email: req.body.email,
-        subject: 'Welcome to Heredo!',
-        text: mailText
-      })
+        subject: "Welcome to Heredo!",
+        text: mailText,
+      });
 
       res.status(201).send({
         error: false,
         message: "User successfully added",
         user: {
           ...apiUser.data,
-          ...user.dataValues
-        }
+          ...user.dataValues,
+        },
       });
     } catch (err) {
       console.log(err);

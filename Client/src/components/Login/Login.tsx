@@ -6,18 +6,25 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import SignUpForm from "../Form/SignUpFormContainer";
 import SignInForm from "../Form/SignInFormContainer";
+import styled from "styled-components";
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: any;
   value: any;
 }
-
+const StyledAppBar = styled(AppBar)`
+  background: white;
+  color: black;
+  align-items: center;
+  width: 50%;
+  align-self: "center";
+`;
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div 
+    <div
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -54,13 +61,19 @@ export default function Login() {
   };
 
   return (
-    <div >
-      <AppBar position="static">
-        <Tabs  value={value} onChange={handleChange} aria-label="simple tabs example">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <StyledAppBar position="static">
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab icon={SignInLabel} />
           <Tab icon={SignUpLabel} />
         </Tabs>
-      </AppBar>
+      </StyledAppBar>
       <TabPanel value={value} index={0}>
         <SignInForm />
       </TabPanel>
