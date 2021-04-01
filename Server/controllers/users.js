@@ -1,6 +1,7 @@
-const { User } = require("../models");
-const axios = require("axios");
-const Spreadsheet = require("../lib/spreadsheets");
+const { User } = require('../models');
+const axios = require('axios');
+const Spreadsheet = require('../lib/spreadsheets');
+const sendMail = require('../lib/mailer')
 
 module.exports = {
   fetchAll: async (req, res) => {
@@ -86,7 +87,8 @@ module.exports = {
     res.send(content);
   },
   create: async (req, res) => {
-    console.log(req.file);
+    var mailText = 'You have successfully registered your account!';
+
     try {
       var apiUser = await axios.post(
         "http://127.0.0.1:5000/user",
@@ -120,9 +122,17 @@ module.exports = {
           has_criminal_record: req.body.has_criminal_record,
           has_committed_to_privacy: req.body.has_committed_to_privacy,
           is_manager: false,
-          is_approved: false,
+          is_approved: false
         });
+
+        mailText = 'You applied for being a manager. We will let you know once your application is approved.'
       }
+
+      sendMail({
+        email: req.body.email,
+        subject: 'Welcome to Heredo!',
+        text: mailText
+      })
 
       res.status(201).send({
         error: false,
@@ -130,7 +140,7 @@ module.exports = {
         user: {
           ...apiUser.data,
           ...user.dataValues
-        },
+        }
       });
     } catch (err) {
       console.log(err);
