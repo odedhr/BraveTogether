@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 import { MapProps } from "./MapContainer";
 import Popover from "./PopOver";
-
 const StyledButton = styled(Button)`
   width: 100px;
 `;
@@ -17,8 +16,10 @@ const MapWrapper = styled.div`
   align-items: center;
 `;
 export default function Map(props: MapProps) {
-  const { events, selectedCategory } = props;
-  const AnyReactComponent = ({ interest }: any) => <Popover interest={interest}></Popover>;
+  const { events, selectedCategories } = props;
+  const AnyReactComponent = (data: any) => (
+    <Popover interest={data.interest} hero={data.hero}></Popover>
+  );
   const [markers, setMarkers] = React.useState<any>([]);
   const [creatingEvent, setCreatingEvent] = React.useState(false);
   const map = React.useRef(null);
@@ -32,8 +33,6 @@ export default function Map(props: MapProps) {
   const onMapClick = (lat: number, long: number) => {
     if (creatingEvent) {
       setCreatingEvent(false);
-      // openModal();
-      // createNewEvent({ address: "", hero: "", lat, long, manager_id: "", topic: "" });
       setMarkers([
         ...markers,
         {
@@ -48,9 +47,6 @@ export default function Map(props: MapProps) {
   };
   return (
     <MapWrapper>
-      {/* <StyledButton onClick={onCreateEventButton} variant="contained" color="primary">
-        צור מפגש
-      </StyledButton> */}
       <div style={{ height: "800px", width: "90%", cursor: "crosshair" }}>
         <GoogleMapReact
           ref={map}
@@ -61,17 +57,20 @@ export default function Map(props: MapProps) {
         >
           {events
             .filter((event) => {
-              if (selectedCategory === null || selectedCategory?.length == 0) return event;
-              else if (selectedCategory) {
-                let found = false;
-                selectedCategory.forEach((category) => {
-                  if (event.tags?.includes(category)) found = true;
-                });
-                if (found) return event;
+              if (!selectedCategories) return event;
+              else if (selectedCategories.includes(event.tags)) {
+                return event;
               }
             })
             .map((marker) => {
-              return <AnyReactComponent lat={marker.lat} lng={marker.long} interest="chef" />;
+              return (
+                <AnyReactComponent
+                  lat={marker.lat}
+                  lng={marker.long}
+                  hero={marker.hero}
+                  interest={marker.tags}
+                />
+              );
             })}
         </GoogleMapReact>
       </div>

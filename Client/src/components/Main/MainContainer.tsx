@@ -4,6 +4,7 @@ import Main from "./Main";
 import { Store } from "../../store/storeTypes";
 import { selectCategory } from "../../actions/entitiesActions";
 import { convertAddressToLocationThenCreateEvent, getAllEvents } from "../../actions/eventsActions";
+import { getAllHeroesRequest } from "../../actions/entitiesActions";
 const mapStateToProps = (state: Store) => {
   return {
     categories: state.entities.categories,
@@ -15,6 +16,7 @@ const mapStateToProps = (state: Store) => {
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
+      getAllHeroesRequest,
       selectCategory,
       convertAddressToLocationThenCreateEvent,
       getAllEvents,

@@ -4,6 +4,7 @@ import { Events, Store } from "../store/storeTypes";
 import * as actionStringsTypes from "../actions/types/actionStringsTypes";
 import { createReducer } from "typesafe-actions";
 import { convertAddressToLocationThenCreateEventAC } from "../actions/types/userActionTypes";
+import { getAllHeroes } from "../actions/types/entitiesActionTypes";
 
 // export default function EventsReducer(
 //   state: Events = initialState.events,
@@ -28,7 +29,11 @@ const reducer = createReducer<Events, any>(initialState.events)
     };
   })
   .handleAction(getAllEventsAction.success, (state: Events, action: any) => {
-    console.log("action", action);
     return { ...state, events: [...action.payload] };
+  })
+  .handleAction(getAllHeroes.success, (state: Events, action: any) => {
+    console.log("action", action);
+    return { ...state, heroes: [...action.payload] };
   });
+
 export default reducer;

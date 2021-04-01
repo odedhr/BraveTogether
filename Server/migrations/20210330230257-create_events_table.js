@@ -1,45 +1,49 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('events', {
+    await queryInterface.createTable("events", {
       event_id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       topic: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       lat: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       long: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       address: Sequelize.STRING,
       hero_id: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       manager_id: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       created_at: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updated_at: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
+      tags: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('events');
-  }
+    await queryInterface.dropTable("events");
+  },
 };

@@ -2,10 +2,7 @@ import { Event } from "../store/storeTypes";
 import apiAction from "./apiAction";
 import * as types from "./types/actionStringsTypes";
 import { CreateNewEventAction, getAllEventsAction } from "./types/eventsActionTypes";
-import {
-  convertAddressToLocationThenCreateEventAC,
-  createHeroRequsetAction,
-} from "./types/userActionTypes";
+import { convertAddressToLocationThenCreateEventAC } from "./types/userActionTypes";
 import { makeApiUrl } from "./utils";
 
 export const createNewEvent = (event: Event): CreateNewEventAction => {

@@ -8,6 +8,7 @@ import {
   registerUser,
   tokenRequestAction,
 } from "./types/userActionTypes";
+import axios, { Method, AxiosRequestConfig, CancelTokenSource, ResponseType } from "axios";
 import { Hero, TeacherInput } from "../components/Form/TeacherCardForm";
 export type UserPost = {
   email: string;
@@ -41,7 +42,6 @@ export const registerUserRequset = (user: UserPost) => {
 };
 export const createHeroRequset = (hero: Hero) => {
   const url = makeApiUrl("heroes/");
-  console.log(hero);
   return apiAction({
     request: {
       url,
@@ -50,7 +50,7 @@ export const createHeroRequset = (hero: Hero) => {
     },
     logic: {
       onFailed: (error, dispatch) => console.log(error),
-      onSuccess: (data, dispatch) => console.log(data),
+      onSuccess: (data, dispatch) => dispatch(createHeroRequsetAction.success(data.user)),
       onStarted: () => {},
     },
   });
@@ -84,10 +84,13 @@ export const loginRequest = (username: string) => {
     logic: {
       onFailed: (error, dispatch) => dispatch(loginUserAction.failure(error)),
       onSuccess: (data, dispatch) => {
-        console.log(data);
         if (!data.error) dispatch(loginUserAction.success(data.user));
       },
       onStarted: () => {},
     },
   });
+};
+export const translate = (hebrew: string) => {
+  const url = makeApiUrl("services/translate");
+  return axios.post(url, { text: hebrew });
 };

@@ -7,6 +7,7 @@ import { TeacherCardFormProps } from "./TeacherCardFormContainer";
 import { Category, Event } from "../../store/storeTypes";
 import { Token } from "../../actions/types/userActionTypes";
 import shortId from "shortid";
+import { translate } from "../../actions/usersAction";
 export type TeacherInput = {
   speciality: string;
   fullName: string;
@@ -67,23 +68,28 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
     postNewEvent,
     createHeroRequset,
   } = props;
-  const [selectedCategories, setSelectedCategories] = React.useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = React.useState<string>("");
   const { register, handleSubmit, errors } = useForm();
   const [files, setFiles] = React.useState<File[]>([]);
   const [formData, setFormData] = React.useState<TeacherInput | null>(null);
   const onSubmit = (data: TeacherInput) => {
-    const hero = new FormData();
-
-    hero.append("image", files[0]);
-    hero.append("token", user.token!);
-    hero.append("full_name", data.fullName);
-    hero.append("manager_id", user.id!);
-    hero.append("speciality", data.speciality);
-    hero.append("location", data.location);
-
-    createHeroRequset(hero as any);
-    convertAddressToLocationThenCreateEvent(data.location);
-    setFormData(data);
+    if (selectedCategories) {
+      const hero = {
+        image: files[0],
+        token: user.token!,
+        full_name: data.fullName,
+        manager_id: user.id!,
+        speciality: data.speciality,
+        location: data.location,
+      };
+      createHeroRequset(hero as any);
+      translate(data.location).then((res: any) => {
+        convertAddressToLocationThenCreateEvent(res.data.translation);
+      });
+      setFormData(data);
+    } else {
+      alert("צריך לבחור קטגוריה");
+    }
   };
   React.useEffect(() => {
     if (newEvent?.lat && newEvent?.long && hero.id) {
@@ -95,30 +101,17 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
         manager_id: user.id!,
         title: shortId(),
         description: formData?.description!,
-        tags: ["chess"],
+        tags: selectedCategories,
         // pic: files[0],
         token: user.token!,
         reward: 10,
       };
       postNewEvent(createEvent);
-    } else {
-      alert("חייבים לבחור קטגוריה");
     }
   }, [newEvent, hero]);
 
   const onClickCategory = (category: Category, isSelectedString: string) => {
-    if (isSelectedString) {
-      const newCategories = selectedCategories!.filter((selectedCategory) => {
-        if (selectedCategory !== isSelectedString) return selectedCategory;
-      });
-      setSelectedCategories(newCategories);
-    } else {
-      const categories =
-        selectedCategories && selectedCategories.length > 0
-          ? [...selectedCategories, category.imgName]
-          : [category.imgName];
-      setSelectedCategories(categories);
-    }
+    setSelectedCategories(category.imgName);
   };
   const getFiles = (filesFromDropZone: File[]) => {
     setFiles(filesFromDropZone);
@@ -136,7 +129,7 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
     >
       <Title>בוא נוסיף את המורה שלך (ובקרוב שלנו)</Title>
       <InTheNextDay>במה המורה מתמחה?</InTheNextDay>
-      {CategoriesRenderer(categories, selectedCategories, onClickCategory)}
+      {CategoriesRenderer(categories, [selectedCategories], onClickCategory)}
       <FormWrapper>
         <StyledForm
           onSubmit={handleSubmit(onSubmit)}
@@ -155,7 +148,7 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
             name="fullName"
             ref={register({ required: true, max: 15, min: 2 })}
           />
-          <Input type="text" placeholder="כתובת? רחוב ועיר יספיקו" name="location" ref={register} />
+          <Input type="text" placeholder="כתובת? עיר ורחוב יספיקו" name="location" ref={register} />
           <TextArea
             name="description"
             placeholder="ספרו לנו על הגיבור"

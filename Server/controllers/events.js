@@ -48,7 +48,6 @@ module.exports = {
     res.send(content);
   },
   create: async (req, res) => {
-    console.log(req.body);
     try {
       var apiEvent = await axios.post(
         "http://127.0.0.1:5000/events",

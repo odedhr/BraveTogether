@@ -16,12 +16,13 @@ export type Event = {
   address: string;
   manager_id: string;
   pic: File;
-  tags: string[];
+  tags: string;
   reward: number;
 };
 export type Events = {
   events: Event[];
   newEvent: Event | undefined;
+  heroes: Hero[];
 };
 export type User = {
   firstName: string | undefined;

@@ -43,7 +43,6 @@ const reducer = createReducer<User, any>(initialState.user)
   })
   .handleAction(loginUserAction.success, (state: Store, action: { payload: Token }) => {
     const { payload } = action;
-    console.log(payload);
     return { ...state, ...payload };
   });
 export default reducer;

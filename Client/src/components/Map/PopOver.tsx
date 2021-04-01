@@ -8,6 +8,7 @@ import { ReactComponent as ChessWhite } from "../../assets/icons/chess-white-pin
 import { ReactComponent as LangugageWhite } from "../../assets/icons/language-white-pin.svg";
 import { ReactComponent as StudyWhite } from "../../assets/icons/study-white-pin.svg";
 import { ReactComponent as MusicWhite } from "../../assets/icons/music-white-pin.svg";
+import MapCard from "./MapCard";
 
 const Icons: any = {
   chess: <ChessWhite style={{ height: "50px", width: "50px" }} />,
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function SimplePopover(props: any) {
+  console.log(props);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
 
@@ -56,7 +58,7 @@ export default function SimplePopover(props: any) {
           horizontal: "center",
         }}
       >
-        <Typography className={classes.typography}>The content of the Popover.</Typography>
+        <MapCard hero={props.hero} />
       </Popover>
     </div>
   );

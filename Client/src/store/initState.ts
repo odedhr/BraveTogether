@@ -10,10 +10,12 @@ export default {
       { name: "לימודים לבגרות", imgName: "study" },
     ],
     selectedCategory: undefined,
+    
   },
   events: {
     events: [],
     newEvent: undefined,
+    heroes: [],
   },
 
   user: {

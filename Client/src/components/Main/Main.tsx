@@ -63,9 +63,11 @@ export default function Main(props: MainProps) {
     managerLoggedIn,
     selectCategory,
     getAllEvents,
+    getAllHeroesRequest,
   } = props;
   React.useEffect(() => {
     getAllEvents();
+    getAllHeroesRequest();
   });
   const [isModalOpen, setOpenModal] = React.useState(false);
   const [isMangerSignedUpState, setIsMangerSignedUpState] = React.useState(false);
