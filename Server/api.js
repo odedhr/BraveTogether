@@ -8,6 +8,7 @@ const swaggerDocument = require('./swagger.json');
 const cors = require('cors');
 const cron = require('node-cron');
 const managerApprover = require('./lib/jobs/manager_approver');
+const servicesRouter = require('./routers/services');
 
 cron.schedule('*/30 * * * * *', managerApprover.work);
 
@@ -21,6 +22,7 @@ api.use('/api-docs', swagger.serve, swagger.setup(swaggerDocument));
 api.use("/api/v1/users", usersRouter);
 api.use("/api/v1/heroes", heroesRouter);
 api.use("/api/v1/events", eventsRouter);
+api.use("/api/v1/services", servicesRouter);
 
 api.listen(3001, (err) => {
   if (err) return console.log("Error happened while starting the server: ", err);
