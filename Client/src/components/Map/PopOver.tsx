@@ -11,11 +11,13 @@ import { ReactComponent as MusicWhite } from "../../assets/icons/music-white-pin
 import MapCard from "./MapCard";
 
 const Icons: any = {
-  chess: <ChessWhite style={{ height: "50px", width: "50px" }} />,
-  chef: <ChefWhite style={{ height: "50px", width: "50px" }} />,
-  study: <StudyWhite style={{ height: "50px", width: "50px" }} />,
-  music: <MusicWhite style={{ height: "50px", width: "50px" }} />,
-  language: <LangugageWhite style={{ height: "50px", width: "50px" }} />,
+  chess: <ChessWhite fill="white" style={{ height: "80px", cursor: "pointer", width: "80px" }} />,
+  chef: <ChefWhite fill="white" style={{ height: "80px", cursor: "pointer", width: "80px" }} />,
+  study: <StudyWhite fill="white" style={{ height: "80px", cursor: "pointer", width: "80px" }} />,
+  music: <MusicWhite fill="white" style={{ height: "80px", cursor: "pointer", width: "80px" }} />,
+  language: (
+    <LangugageWhite fill="white" style={{ height: "80px", cursor: "pointer", width: "80px" }} />
+  ),
 };
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

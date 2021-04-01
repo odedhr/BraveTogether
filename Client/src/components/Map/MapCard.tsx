@@ -79,7 +79,8 @@ export default function MapCard(props: IMapCardProps) {
             {hero.speciality}
           </div>
           <div style={{ marginBottom: "15px" }}>
-            {hero.fullName}
+            {/* @ts-ignore */}
+            {hero.full_name}
             <br />
             {hero.location}
           </div>
