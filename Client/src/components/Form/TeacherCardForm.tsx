@@ -8,6 +8,7 @@ import { Category, Event } from "../../store/storeTypes";
 import { Token } from "../../actions/types/userActionTypes";
 import shortId from "shortid";
 import { translate } from "../../actions/usersAction";
+import { SubmitButton } from "./SignUpForm";
 export type TeacherInput = {
   speciality: string;
   fullName: string;
@@ -59,6 +60,7 @@ const TextArea = styled.textarea`
   color: rgba(0, 0, 0, 0.7);
   border: none;
 `;
+
 export default function TeacherCardForm(props: TeacherCardFormProps) {
   const {
     categories,
@@ -130,7 +132,7 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
       }}
     >
       <Title>בוא נוסיף את המורה שלך (ובקרוב שלנו)</Title>
-      <InTheNextDay>במה המורה מתמחה?</InTheNextDay>
+      <InTheNextDay>?במה המורה מתמחה</InTheNextDay>
       {CategoriesRenderer(categories, [selectedCategories], onClickCategory)}
       <FormWrapper>
         <StyledForm
@@ -154,9 +156,9 @@ export default function TeacherCardForm(props: TeacherCardFormProps) {
           <TextArea
             name="description"
             placeholder="ספרו לנו על הגיבור"
-            ref={register({ required: true, max: 0, maxLength: 30 })}
+            ref={register({ required: true, max: 0, maxLength: 60 })}
           />
-          <input type="submit" />
+          <SubmitButton type="submit" value="מעולה, אפשר להוסיף"></SubmitButton>
         </StyledForm>
         <div style={{ marginRight: "10%", marginTop: "44px" }}>
           <DropFile getFiles={getFiles} />

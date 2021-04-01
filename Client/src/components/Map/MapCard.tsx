@@ -43,7 +43,7 @@ const Card = styled.div`
   box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);
   border-radius: 15px;
 `;
-const SetClass = styled.div`
+export const SetClass = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
