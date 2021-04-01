@@ -4,7 +4,6 @@ import BraveLogo from "../../assets/icons/BraveLogo.png";
 import { ReactComponent as LinkedIn } from "../../assets/icons/linkdin.svg";
 
 import styled from "styled-components";
-export interface IAboutUsProps {}
 
 const AboutContainer = styled.div`
   display: flex;
@@ -20,6 +19,10 @@ const TeamContainer = styled.div`
 `;
 const TeamMember = styled.div`
   background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   padding: 15px;
   margin: 10px 5px;
   border-radius: 10px;
@@ -27,7 +30,7 @@ const TeamMember = styled.div`
   cursor: pointer;
 `;
 
-export default function AboutUs(props: IAboutUsProps) {
+export default function AboutUs() {
   return (
     <div>
       <AboutContainer style={{ textAlign: "right" }} dir="rtl">
@@ -61,46 +64,40 @@ export default function AboutUs(props: IAboutUsProps) {
           onClick={() => window.open("https://www.linkedin.com/in/orit-weinstein-ba33351b0/")}
         >
           <b>Orit Weinstein</b>
-          <br />
           UX Designer
-          <LinkedIn height={30} width={30}></LinkedIn>
+          <LinkedIn height={30} style={{ marginTop: "15px" }} width={30}></LinkedIn>
         </TeamMember>
         <TeamMember onClick={() => window.open("https://www.linkedin.com/in/oded-harel-5780455b/")}>
           <b>Oded Harel</b>
-          <br />
           Programmer
-          <LinkedIn height={30} width={30}></LinkedIn>
+          <LinkedIn height={30} style={{ marginTop: "15px" }} width={30}></LinkedIn>
         </TeamMember>
         <TeamMember onClick={() => window.open("https://www.linkedin.com/in/noarassin/")}>
           <b>Noa Rassin</b>
-          <br />
           Product Owner
-          <LinkedIn height={30} width={30}></LinkedIn>
+          <LinkedIn height={30} style={{ marginTop: "15px" }} width={30}></LinkedIn>
         </TeamMember>
         <TeamMember onClick={() => window.open("http://www.linkedin.com/in/niv-eliyahu")}>
           <b>Niv Eliyahu</b>
-          <br />
           Programmer
-          <LinkedIn height={30} width={30}></LinkedIn>
+          <LinkedIn height={30} style={{ marginTop: "15px" }} width={30}></LinkedIn>
         </TeamMember>
         <TeamMember onClick={() => window.open("https://www.linkedin.com/in/lliioorrn")}>
           <b>Lior Nataf</b>
-          <br />
           Programmer
-          <LinkedIn height={30} width={30}></LinkedIn>
+          <LinkedIn height={30} style={{ marginTop: "15px" }} width={30}></LinkedIn>
         </TeamMember>
         <TeamMember
           onClick={() => window.open("https://www.linkedin.com/in/hagit-buda-2600b1183/")}
         >
           <b>Hagit Buda</b>
-          <br />
           Programmer
-          <LinkedIn height={30} width={30}></LinkedIn>
+          <LinkedIn height={30} style={{ marginTop: "15px" }} width={30}></LinkedIn>
         </TeamMember>
         <TeamMember onClick={() => window.open("https://www.linkedin.com/in/boban-sugareski/")}>
           <b>Boban Sugareski</b>
-          <br />
           Programmer
+          <LinkedIn height={30} style={{ marginTop: "15px" }} width={30}></LinkedIn>
         </TeamMember>
       </TeamContainer>
     </div>
