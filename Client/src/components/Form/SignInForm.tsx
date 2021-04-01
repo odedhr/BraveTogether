@@ -6,7 +6,7 @@ import { SignInFormProps } from "./SignInFormContainer";
 const InputBox = styled.input<any>`
   border: none;
   border-radius: 7px;
-  margin: 9px 49px 5px 20px;
+  margin: 9px;
   padding: 9px 30px;
   width: 30%;
   background-color: #f0f0f0;
@@ -21,7 +21,7 @@ const InputCheckBoxLabel = styled.label``;
 
 const SubmitButton = styled.input`
   padding: 10px 15px;
-  margin: 15px 47px;
+  margin: 15px 9px;
   background-color: #048ba8;
   width: 15%;
   min-width:fit-content;
@@ -47,7 +47,7 @@ export default function SignInForm(props: SignInFormProps) {
   const onSubmit = ({ username, password }: FormInput) => tokenRequest(username, password);
   return (
     <div>
-      <FormFrame onSubmit={handleSubmit(onSubmit)}>
+      <FormFrame style={{margin:"20px 70px"}} onSubmit={handleSubmit(onSubmit)}>
         <InputBox
           type="text"
           placeholder="אימייל"
