@@ -1,6 +1,7 @@
 const creds = require('../../config/sheets.json');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const { User } = require('../../models');
+const sendMail = require('../mailer')
 
 module.exports = {
   work: async () => {
@@ -23,6 +24,11 @@ module.exports = {
         });
         row['is_manager'] = true
         await row.save()
+        sendMail({
+          email: row['email'],
+          subject: 'Your application is approved!',
+          text: 'We are happy to approve your application!'
+        });
         console.log(`User with email ${row['email']} is now a manager!`);
       }
     })
