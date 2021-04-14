@@ -1,12 +1,12 @@
 {
-  "type": "service_account",
-  "project_id": "hero-app-309314",
-  "private_key_id": "b88bfda1fb6338338ba5d2f079ac4b8efd7cc68e",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCbjtqj+bvyoR2p\nb6qIBs1RAy2+rFsT+Z72Se93P/abKOcJ5WL6vVYZV2VtqRZN6OcsP170oHeZFxGJ\n8tg36uUsucTNcPB4W7gCezDOy+XND7wPmafg6XDLavEgTP/6dNVNyofaAk6DY7tI\na1PV/g4gO4LtBlbkJM7cCNKxvS1LVwq0btXmaeE9ubsUOcXvPUIX7iRdT0fA4Tpd\nWlqF9HlT8/nC+yB0ualKJBx/RMZ2n0GpWhi5koigECwV0EaPXseb7LCtFgCpzZUE\nHe1WXxTOEwbrOcyXYeIXmrFYhUZapvt/P5v5MJLFt99t9imXSIAfWAlMWSEhakDk\nw9mJ+xNXAgMBAAECggEAAUORYjiyvr9xYsGOBKntfCWG9yAmY0ypbn3eTL0/zzXv\nXqS2/6uPKgiMQe5YSIzGaBUhu+Ib5qoJ0fGfsSCe+RSPVU4AHjI8lgSTOnLsrJRe\npk/MzeaHrJdzWxxVDh9p5kZpgSt4oNesG2QH29rDGZ7yKuPcy+DCr4YA1EHhvtV0\neatNWWjts11QFg0ft09dDHKQ9Mh07nMjncTZJVzpS8r3oezL64BVpe8h6jT6X/xg\nWqf6kNt6OrwNpDaOOdvoWFoXHggPYy8fLslpt1KdpYi6eazp0j4Lc+n26EXvQG94\ngsV6ZdrkOK/P6jMMRRBOsLP8fFBsryxRn9FTutRKbQKBgQDOR9cE5kiPDBqW+Trw\nY/+dcnVkkvonmY9KiR54Gb+iW/YVttra7IxRp2x5fjPFfc7vcdf2HLEtx0ZlERkc\n/a8DCga6vgZEnQNiPbmcBe4k0RNFstQevz44C7i6RLs4P5Xr6nAfv1v/Ji2uAzz3\nbJC+2UHyR6GHP6Kr3QWdR9ItEwKBgQDBDUVb1e5O7ZbAajfqP3v36D2pv462busG\nOmkdsaW9ZAi+XDSJp8jLIIoJuMPNyg9gYiKZb+jDyf1HArKf3/wb8R45LjHoKWPc\nw7Oj499I2u0APrNSbTyRydG0no/fS4P8eadC2zlB254YaYoY3676t/CAKJOLpyBg\nzZh5PRodLQKBgHSABELjH/WSG25KoevkPhgY7Y34qEk3I8Mvv8KKoD08/LV0yRO9\nZt4y1UOkb+7Ix9dZj2OS/sng8rPfvTQvXek0f2p2KaoUlzWjsLEadE3cuqqxfbVD\nwwr6K8EfUjFJUA2mIN79PyLR2BigAY2nhfQTVXhU1jhBS0kPEb2rM1t7AoGBAKl3\n9+oNW7zHzq2s0Nb+0dmncvIfqa02o3R9NCeP+jnOpepN0QUCWD8Qmny8SI7PkT4A\nB/WACupM191NXfcAzjTNLsXtanwuUW7MEVeOw0UWgjTT1eFG6YPlkgSnqQ7RINUz\nCgSjo5jPrPIrO8JoIhgP/rzSYeuXU9IGyZGsdM8lAoGAUV0qUp+J8Qgj/IhWs77Q\nhKPvi2tdU+agkH8ODl21wnsNMt6PzbgLiGGXJuTLadiyy9V2NMKWBl+GPsdOZSNw\nG80/A7LfZUtMDcnpGvzLT4DyCjgpt/rNjq1oRhsjyRhsKCwbmcMpjnZkdMlWLW4Y\ngmfXT3351QNs1AGsko6qU68=\n-----END PRIVATE KEY-----\n",
-  "client_email": "bobansugareski@hero-app-309314.iam.gserviceaccount.com",
-  "client_id": "113138768868341409185",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bobansugareski%40hero-app-309314.iam.gserviceaccount.com"
+  "type": "",
+  "project_id": "",
+  "private_key_id": "",
+  "private_key": "",
+  "client_email": "",
+  "client_id": "",
+  "auth_uri": "",
+  "token_uri": "",
+  "auth_provider_x509_cert_url": "",
+  "client_x509_cert_url": ""
 }
